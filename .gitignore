@@ -1,0 +1,16 @@
+/node_modules/*
+*.local
+/*/pic*/*
+/*/ima*/*
+/*/*.so
+/*/*.o
+/*/main
+/*/cma*/*o
+/*/.idea/*
+/.idea/*/*
+/.idea/
+/*/*.pyc*
+/*/*.png
+/*/*.local
+/*/*/*/node_modules/*
+/*/*/node_modules/*
