@@ -12,11 +12,11 @@ export class Component1 extends React.Component {
     render() {
         return (
             <div>
-                <h1 className = "text-center">投票通道</h1>
+                <h1 className = "text-center">Login</h1>
             </div>
         );
     }
-};
+}
 
 class Board extends React.Component{
     constructor(props) {

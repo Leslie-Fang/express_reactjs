@@ -23,18 +23,14 @@ export var users = function(state = userData,action){
         case 'GET_VERYFY_DATA':
             console.log('GET_VERYFY_DATA');
             console.log(action.payload.state);
-            if(action.payload.state == 'ok' ){
-                window.location.href = '/voter';
-            }
-            else if(action.payload.state == 'novoter' ){
+            if(action.payload.state == 'nouser' ){
+                window.location.href = '/signup';
+            }else if(action.payload.state == 'nopassword'){
+                window.location.href = '/login';
+                alert('Wrong password! please input again');
+            }else if(action.payload.state == 'ok'){
                 window.location.href = '/';
-                alert('无效的验证码');
             }
-            else if(action.payload.state == 'secondvoter'){
-                window.location.href = '/';
-                alert('已经投过票了');
-            }
-            //window.location.href = '/voter';
             return Object.assign({},action.payload);
         default:
             console.log('return the defalut userData');

@@ -44,7 +44,7 @@ var Component1 = exports.Component1 = function (_React$Component) {
                 React.createElement(
                     "h1",
                     { className: "text-center" },
-                    "\u6295\u7968\u901A\u9053"
+                    "Login"
                 )
             );
         }
@@ -52,8 +52,6 @@ var Component1 = exports.Component1 = function (_React$Component) {
 
     return Component1;
 }(React.Component);
-
-;
 
 var Board = function (_React$Component2) {
     _inherits(Board, _React$Component2);

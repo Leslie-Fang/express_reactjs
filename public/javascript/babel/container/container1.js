@@ -10,6 +10,8 @@ var _reactRedux = require('react-redux');
 
 var _redux = require('redux');
 
+var _index = require('../../babel/action/index.js');
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -23,7 +25,7 @@ function mapStateToProps(state) {
 }
 
 function matchDispatchToProps(dispatch) {
-    return (0, _redux.bindActionCreators)({}, dispatch);
+    return (0, _redux.bindActionCreators)({ submitData: _index.submitData }, dispatch);
 }
 
 var Container1 = function (_React$Component) {
@@ -32,10 +34,64 @@ var Container1 = function (_React$Component) {
     function Container1(props) {
         _classCallCheck(this, Container1);
 
-        return _possibleConstructorReturn(this, (Container1.__proto__ || Object.getPrototypeOf(Container1)).call(this, props));
+        var _this = _possibleConstructorReturn(this, (Container1.__proto__ || Object.getPrototypeOf(Container1)).call(this, props));
+
+        _this.state = { userNameValue: "please enter username", defaultUserNameValue: "please enter username",
+            passwordValue: "please enter password", defaultPasswordValue: "please enter password" };
+        _this.handleSubmit = _this.handleSubmit.bind(_this);
+        _this.handleusernameFocus = _this.handleusernameFocus.bind(_this);
+        _this.handleusernameChange = _this.handleusernameChange.bind(_this);
+        _this.handlepasswordFocus = _this.handlepasswordFocus.bind(_this);
+        _this.handlepasswordChange = _this.handlepasswordChange.bind(_this);
+        return _this;
     }
 
     _createClass(Container1, [{
+        key: 'handleusernameChange',
+        value: function handleusernameChange(event) {
+            this.setState({ userNameValue: event.target.value });
+            // console.log(event.target.value);
+            // console.log(this.state.value);
+        }
+    }, {
+        key: 'handlepasswordChange',
+        value: function handlepasswordChange(event) {
+            this.setState({ passwordValue: event.target.value });
+            // console.log(event.target.value);
+            // console.log(this.state.value);
+        }
+    }, {
+        key: 'handleSubmit',
+        value: function handleSubmit(event) {
+            console.log("handleSubmit");
+            event.preventDefault();
+            //var codedata = "username:"+this.state.userNameValue +"password:"+this.state.passwordValue;
+            if (!/^[A-Za-z0-9]+$/.test(this.state.userNameValue)) {
+                alert("用户名只能含有数字有字母!");
+                return false;
+            }
+            if (!/^[A-Za-z0-9]+$/.test(this.state.passwordValue)) {
+                alert("密码只能含有数字有字母!");
+                return false;
+            }
+            //alert("不能含有汉字！");
+            console.log("prepare to submit data!");
+            //console.log(codedata);
+            this.props.submitData(this.state.userNameValue, this.state.passwordValue);
+        }
+    }, {
+        key: 'handleusernameFocus',
+        value: function handleusernameFocus(event) {
+            // console.log('Onfocus');
+            this.setState({ userNameValue: "" });
+        }
+    }, {
+        key: 'handlepasswordFocus',
+        value: function handlepasswordFocus(event) {
+            // console.log('Onfocus');
+            this.setState({ passwordValue: "" });
+        }
+    }, {
         key: 'render',
         value: function render() {
             return React.createElement(
@@ -43,24 +99,37 @@ var Container1 = function (_React$Component) {
                 null,
                 React.createElement(
                     'form',
-                    { className: 'text-center' },
+                    { className: 'text-center', onSubmit: this.handleSubmit },
                     React.createElement(
                         'div',
                         { className: 'form-group' },
                         React.createElement(
                             'label',
                             { 'for': 'exampleInputPassword1' },
-                            '\u9A8C\u8BC1\u7801'
+                            'Username'
                         ),
-                        React.createElement('br', null),
-                        React.createElement('input', { type: 'text', className: 'form-control', id: 'exampleInputPassword1',
+                        React.createElement('input', { type: 'text', className: 'form-control', id: 'exampleInputUsername',
                             ref: 'verify',
-                            value: 'hhhh' })
+                            value: this.state.userNameValue,
+                            placeHolder: this.state.defaultUserNameValue,
+                            onFocus: this.handleusernameFocus,
+                            onChange: this.handleusernameChange }),
+                        React.createElement(
+                            'label',
+                            { 'for': 'exampleInputPassword1' },
+                            'Password'
+                        ),
+                        React.createElement('input', { type: 'text', className: 'form-control', id: 'exampleInputPassword',
+                            ref: 'verify',
+                            value: this.state.passwordValue,
+                            placeHolder: this.state.defaultPasswordValue,
+                            onFocus: this.handlepasswordFocus,
+                            onChange: this.handlepasswordChange })
                     ),
                     React.createElement(
                         'button',
                         { type: 'submit', className: 'btn btn-primary' },
-                        '\u767B\u5165'
+                        'Login'
                     )
                 )
             );

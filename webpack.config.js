@@ -2,7 +2,7 @@ var webpack = require('webpack');
 const path = require('path');
 module.exports = {
     entry: {
-        main:'./public/javascript/babel/main.js',
+        login:'./public/javascript/babel/login.js',
     },
     output: {
         path : path.resolve(__dirname, 'public/javascript/webpack/'),
