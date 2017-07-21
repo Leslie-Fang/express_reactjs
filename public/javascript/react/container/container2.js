@@ -1,6 +1,9 @@
+/**
+ * Created by leslie on 2017/7/21.
+ */
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import {submitData} from '../../babel/action/index.js';
+import {signup} from '../../babel/action/index.js';
 
 function mapStateToProps(state) {
     return ({
@@ -9,10 +12,10 @@ function mapStateToProps(state) {
 }
 
 function matchDispatchToProps(dispatch){
-    return bindActionCreators({submitData:submitData}, dispatch);
+    return bindActionCreators({signnup:signup}, dispatch);
 }
 
-class Container1 extends React.Component {
+class Container2 extends React.Component {
     constructor(props) {
         super(props);
         this.state = {userNameValue: "please enter username",defaultUserNameValue: "please enter username",
@@ -46,7 +49,7 @@ class Container1 extends React.Component {
             alert("密码只能含有数字有字母!");
             return false;
         }
-        this.props.submitData(this.state.userNameValue,this.state.passwordValue);
+        this.props.signnup(this.state.userNameValue,this.state.passwordValue);
     }
     handleusernameFocus(event){
         // console.log('Onfocus');
@@ -76,9 +79,9 @@ class Container1 extends React.Component {
                                onFocus={this.handlepasswordFocus}
                                onChange={this.handlepasswordChange}/>
                     </div>
-                    <button type="submit" className="btn btn-primary">Login</button>
+                    <button type="submit" className="btn btn-primary">signup</button>
 
-                    <a class="btn btn-default" href="/signup" role="button">New User Signup</a>
+                    <a class="btn btn-default" href="/" role="button">Back to main page</a>
                 </form>
             </div>
         );
@@ -87,4 +90,4 @@ class Container1 extends React.Component {
 
 //store.dispatch({ type: 'INCREMENT' });
 
-export default connect(mapStateToProps,matchDispatchToProps)(Container1);
+export default connect(mapStateToProps,matchDispatchToProps)(Container2);

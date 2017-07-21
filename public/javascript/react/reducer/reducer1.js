@@ -32,6 +32,20 @@ export var users = function(state = userData,action){
                 window.location.href = '/';
             }
             return Object.assign({},action.payload);
+        case 'SIGNUP_ING':
+            console.log('SUBMIT_SIGNUP_DATA');
+            console.log(action.payload);
+            return Object.assign({},action.payload);
+        case 'SIGNUP_ED':
+            console.log('SIGNUP_ED');
+            console.log(action.payload.state);
+            if(action.payload.state == 'userExsit' ){
+                window.location.href = '/signup';
+                alert('The username exsits, please select another one.');
+            }else if(action.payload.state == 'ok'){
+                window.location.href = '/';
+            }
+            return Object.assign({},action.payload);
         default:
             console.log('return the defalut userData');
             return userData;

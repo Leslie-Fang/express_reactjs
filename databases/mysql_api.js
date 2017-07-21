@@ -9,13 +9,15 @@ exports.validateifUserExist=function(req, data,res,callback){
         if (err) throw err;
         if(result.length === 0) {
             //console.log(result);
+            connection.end();
             callback({state:'nouser'});
         }
         else{
+            connection.end();
             callback({state:'userExsit'});
         }
     });
-    connection.end();
+
 };
 
 exports.checkpassword=function(req, data,res,callback){
@@ -26,6 +28,29 @@ exports.checkpassword=function(req, data,res,callback){
         if (err) throw err;
         if(result.length === 0) {
             //console.log(result);
+            connection.end();
+            callback({state:'nopassword'});
+        }
+        else{
+            //console.log(result);
+            res.cookie('user', data, {maxAge: 60*60*1000});
+            res.cookie('islogin', 1, {maxAge: 60*60*1000});
+            connection.end();
+            callback({state:'ok'});
+        }
+    });
+};
+
+exports.saveuser=function(req, data,res,callback){
+    var connection = mysql.createConnection(config);
+    connection.connect();
+    console.log(data);
+    connection.query('insert into user (username, password) values(?,?)',[data.username,data.password], function(err, result) {
+
+        if (err) throw err;
+        callback({state:'ok'});
+/*        if(result.length === 0) {
+            //console.log(result);
             callback({state:'nopassword'});
         }
         else{
@@ -33,7 +58,7 @@ exports.checkpassword=function(req, data,res,callback){
             res.cookie('user', data, {maxAge: 60*60*1000});
             res.cookie('islogin', 1, {maxAge: 60*60*1000});
             callback({state:'ok'});
-        }
+        }*/
     });
     connection.end();
 };

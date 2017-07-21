@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 83);
+/******/ 	return __webpack_require__(__webpack_require__.s = 85);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -17562,7 +17562,9 @@ return jQuery;
 
 
 /***/ }),
-/* 83 */
+/* 83 */,
+/* 84 */,
+/* 85 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17571,7 +17573,7 @@ return jQuery;
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-exports.Component1 = undefined;
+exports.Component2 = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -17579,7 +17581,7 @@ var _reactRedux = __webpack_require__(15);
 
 var _store = __webpack_require__(34);
 
-var _container = __webpack_require__(84);
+var _container = __webpack_require__(86);
 
 var _container2 = _interopRequireDefault(_container);
 
@@ -17594,16 +17596,16 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 */
 
 
-var Component1 = exports.Component1 = function (_React$Component) {
-    _inherits(Component1, _React$Component);
+var Component2 = exports.Component2 = function (_React$Component) {
+    _inherits(Component2, _React$Component);
 
-    function Component1(props) {
-        _classCallCheck(this, Component1);
+    function Component2(props) {
+        _classCallCheck(this, Component2);
 
-        return _possibleConstructorReturn(this, (Component1.__proto__ || Object.getPrototypeOf(Component1)).call(this, props));
+        return _possibleConstructorReturn(this, (Component2.__proto__ || Object.getPrototypeOf(Component2)).call(this, props));
     }
 
-    _createClass(Component1, [{
+    _createClass(Component2, [{
         key: "render",
         value: function render() {
             return React.createElement(
@@ -17612,13 +17614,13 @@ var Component1 = exports.Component1 = function (_React$Component) {
                 React.createElement(
                     "h1",
                     { className: "text-center" },
-                    "Login"
+                    "Signup"
                 )
             );
         }
     }]);
 
-    return Component1;
+    return Component2;
 }(React.Component);
 
 var Board = function (_React$Component2) {
@@ -17639,7 +17641,7 @@ var Board = function (_React$Component2) {
                 React.createElement(
                     "div",
                     { className: "container" },
-                    React.createElement(Component1, null),
+                    React.createElement(Component2, null),
                     React.createElement(_container2.default, null)
                 )
             );
@@ -17652,7 +17654,7 @@ var Board = function (_React$Component2) {
 ReactDOM.render(React.createElement(Board, null), document.getElementById('main'));
 
 /***/ }),
-/* 84 */
+/* 86 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17674,7 +17676,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /**
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * Created by leslie on 2017/7/21.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                */
+
 
 function mapStateToProps(state) {
     return {
@@ -17683,16 +17688,16 @@ function mapStateToProps(state) {
 }
 
 function matchDispatchToProps(dispatch) {
-    return (0, _redux.bindActionCreators)({ submitData: _index.submitData }, dispatch);
+    return (0, _redux.bindActionCreators)({ signnup: _index.signup }, dispatch);
 }
 
-var Container1 = function (_React$Component) {
-    _inherits(Container1, _React$Component);
+var Container2 = function (_React$Component) {
+    _inherits(Container2, _React$Component);
 
-    function Container1(props) {
-        _classCallCheck(this, Container1);
+    function Container2(props) {
+        _classCallCheck(this, Container2);
 
-        var _this = _possibleConstructorReturn(this, (Container1.__proto__ || Object.getPrototypeOf(Container1)).call(this, props));
+        var _this = _possibleConstructorReturn(this, (Container2.__proto__ || Object.getPrototypeOf(Container2)).call(this, props));
 
         _this.state = { userNameValue: "please enter username", defaultUserNameValue: "please enter username",
             passwordValue: "please enter password", defaultPasswordValue: "please enter password" };
@@ -17704,7 +17709,7 @@ var Container1 = function (_React$Component) {
         return _this;
     }
 
-    _createClass(Container1, [{
+    _createClass(Container2, [{
         key: 'handleusernameChange',
         value: function handleusernameChange(event) {
             this.setState({ userNameValue: event.target.value });
@@ -17731,7 +17736,7 @@ var Container1 = function (_React$Component) {
                 alert("密码只能含有数字有字母!");
                 return false;
             }
-            this.props.submitData(this.state.userNameValue, this.state.passwordValue);
+            this.props.signnup(this.state.userNameValue, this.state.passwordValue);
         }
     }, {
         key: 'handleusernameFocus',
@@ -17783,24 +17788,24 @@ var Container1 = function (_React$Component) {
                     React.createElement(
                         'button',
                         { type: 'submit', className: 'btn btn-primary' },
-                        'Login'
+                        'signup'
                     ),
                     React.createElement(
                         'a',
-                        { 'class': 'btn btn-default', href: '/signup', role: 'button' },
-                        'New User Signup'
+                        { 'class': 'btn btn-default', href: '/', role: 'button' },
+                        'Back to main page'
                     )
                 )
             );
         }
     }]);
 
-    return Container1;
+    return Container2;
 }(React.Component);
 
 //store.dispatch({ type: 'INCREMENT' });
 
-exports.default = (0, _reactRedux.connect)(mapStateToProps, matchDispatchToProps)(Container1);
+exports.default = (0, _reactRedux.connect)(mapStateToProps, matchDispatchToProps)(Container2);
 
 /***/ })
 /******/ ]);

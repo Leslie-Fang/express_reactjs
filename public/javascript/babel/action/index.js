@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-exports.submitData = undefined;
+exports.signup = exports.submitData = undefined;
 
 var _jquery = require("jquery");
 
@@ -30,6 +30,32 @@ var submitData = exports.submitData = function submitData(username, password) {
             console.log('back in ajax!');
             var action = {
                 type: 'GET_VERYFY_DATA',
+                state: 'finishFetchingdata',
+                payload: data
+            };
+            _store.store.dispatch(action);
+            return data;
+        })
+    };
+};
+
+var signup = exports.signup = function signup(username, password) {
+    console.log("log codedata");
+    console.log(username);
+    console.log(password);
+    return {
+        type: 'SIGNUP_ING',
+        state: 'isFetchingdata',
+        payload: _jquery2.default.ajax({
+            method: "POST",
+            data: { username: username, password: password },
+            url: "/signup",
+            dataType: "json"
+        }).then(function (data) {
+            console.log(data);
+            console.log('back in ajax!');
+            var action = {
+                type: 'SIGNUP_ED',
                 state: 'finishFetchingdata',
                 payload: data
             };

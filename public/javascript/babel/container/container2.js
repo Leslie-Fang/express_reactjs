@@ -16,7 +16,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /**
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * Created by leslie on 2017/7/21.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                */
+
 
 function mapStateToProps(state) {
     return {
@@ -25,16 +28,16 @@ function mapStateToProps(state) {
 }
 
 function matchDispatchToProps(dispatch) {
-    return (0, _redux.bindActionCreators)({ submitData: _index.submitData }, dispatch);
+    return (0, _redux.bindActionCreators)({ signnup: _index.signup }, dispatch);
 }
 
-var Container1 = function (_React$Component) {
-    _inherits(Container1, _React$Component);
+var Container2 = function (_React$Component) {
+    _inherits(Container2, _React$Component);
 
-    function Container1(props) {
-        _classCallCheck(this, Container1);
+    function Container2(props) {
+        _classCallCheck(this, Container2);
 
-        var _this = _possibleConstructorReturn(this, (Container1.__proto__ || Object.getPrototypeOf(Container1)).call(this, props));
+        var _this = _possibleConstructorReturn(this, (Container2.__proto__ || Object.getPrototypeOf(Container2)).call(this, props));
 
         _this.state = { userNameValue: "please enter username", defaultUserNameValue: "please enter username",
             passwordValue: "please enter password", defaultPasswordValue: "please enter password" };
@@ -46,7 +49,7 @@ var Container1 = function (_React$Component) {
         return _this;
     }
 
-    _createClass(Container1, [{
+    _createClass(Container2, [{
         key: 'handleusernameChange',
         value: function handleusernameChange(event) {
             this.setState({ userNameValue: event.target.value });
@@ -73,7 +76,7 @@ var Container1 = function (_React$Component) {
                 alert("密码只能含有数字有字母!");
                 return false;
             }
-            this.props.submitData(this.state.userNameValue, this.state.passwordValue);
+            this.props.signnup(this.state.userNameValue, this.state.passwordValue);
         }
     }, {
         key: 'handleusernameFocus',
@@ -125,21 +128,21 @@ var Container1 = function (_React$Component) {
                     React.createElement(
                         'button',
                         { type: 'submit', className: 'btn btn-primary' },
-                        'Login'
+                        'signup'
                     ),
                     React.createElement(
                         'a',
-                        { 'class': 'btn btn-default', href: '/signup', role: 'button' },
-                        'New User Signup'
+                        { 'class': 'btn btn-default', href: '/', role: 'button' },
+                        'Back to main page'
                     )
                 )
             );
         }
     }]);
 
-    return Container1;
+    return Container2;
 }(React.Component);
 
 //store.dispatch({ type: 'INCREMENT' });
 
-exports.default = (0, _reactRedux.connect)(mapStateToProps, matchDispatchToProps)(Container1);
+exports.default = (0, _reactRedux.connect)(mapStateToProps, matchDispatchToProps)(Container2);
