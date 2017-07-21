@@ -35,7 +35,7 @@ var users = exports.users = function users() {
                 window.location.href = '/login';
                 alert('Wrong password! please input again');
             } else if (action.payload.state == 'ok') {
-                window.location.href = '/';
+                window.location.href = '/main';
             }
             return Object.assign({}, action.payload);
         case 'SIGNUP_ING':
@@ -49,7 +49,7 @@ var users = exports.users = function users() {
                 window.location.href = '/signup';
                 alert('The username exsits, please select another one.');
             } else if (action.payload.state == 'ok') {
-                window.location.href = '/';
+                window.location.href = '/login';
             }
             return Object.assign({}, action.payload);
         default:

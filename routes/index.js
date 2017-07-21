@@ -4,7 +4,18 @@ var my=require('../databases/mysql_api');
 var bcrypt = require('bcrypt');
 var saltRounds = 10;
 
-router.get('/',function(req,res){
+router.use('/main',function(req,res,next){
+    if(req.cookies.islogin == 1){
+        next();
+    }
+    else{
+        console.log('Not login!');
+        console.log(req.cookies.islogin);
+        res.redirect('/login');
+    }
+});
+
+router.get('/main',function(req,res){
     //res.render("login");
     res.send("main");
 });

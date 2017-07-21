@@ -30,7 +30,7 @@ export var users = function(state = userData,action){
                 window.location.href = '/login';
                 alert('Wrong password! please input again');
             }else if(action.payload.state == 'ok'){
-                window.location.href = '/';
+                window.location.href = '/main';
             }
             return Object.assign({},action.payload);
         case 'SIGNUP_ING':
@@ -44,7 +44,7 @@ export var users = function(state = userData,action){
                 window.location.href = '/signup';
                 alert('The username exsits, please select another one.');
             }else if(action.payload.state == 'ok'){
-                window.location.href = '/';
+                window.location.href = '/login';
             }
             return Object.assign({},action.payload);
         default:
