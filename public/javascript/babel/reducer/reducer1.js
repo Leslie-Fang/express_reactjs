@@ -30,6 +30,7 @@ var users = exports.users = function users() {
             console.log(action.payload.state);
             if (action.payload.state == 'nouser') {
                 window.location.href = '/signup';
+                alert('user does not exsit, please signup');
             } else if (action.payload.state == 'nopassword') {
                 window.location.href = '/login';
                 alert('Wrong password! please input again');
