@@ -76,16 +76,20 @@ router.post('/signup', function(req, res, next) {
         }
     });
 },function(req, res){
-    console.log('save new user');
-    console.log(req.param('username'));
-    console.log(req.param('password'));
-    var data = {username:req.param('username'),password:req.param('password')};
-    my.saveuser(req,data,res,function(queryData){
-        console.log(queryData);
-        console.log('In callback!');
-        //didn't find the user return novoter
-        return res.send(queryData);
+    bcrypt.hash(req.param('password'), saltRounds, function(err, hash) {
+        console.log('save new user');
+        console.log(req.param('username'));
+        console.log(req.param('password'));
+        console.log(hash);
+        var data = {username:req.param('username'),password:hash};
+        my.saveuser(req,data,res,function(queryData){
+            console.log(queryData);
+            console.log('In callback!');
+            //didn't find the user return novoter
+            return res.send(queryData);
+        });
     });
+
 });
 
 module.exports = router;
