@@ -69,7 +69,7 @@ class Container1 extends React.Component {
                                onFocus={this.handleusernameFocus}
                                onChange={this.handleusernameChange}/>
                         <label for="exampleInputPassword1">Password</label>
-                        <input type="text" className="form-control" id="exampleInputPassword"
+                        <input type="password" className="form-control" id="exampleInputPassword"
                                ref="verify"
                                value={this.state.passwordValue}
                                placeHolder={this.state.defaultPasswordValue}
