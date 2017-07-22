@@ -42,8 +42,15 @@ exports.checkpassword=function(req, data,res,callback){
                 //now has some problem with the res, which always return false
                 if(result[0].password)
                 if(compareResult == true){
+                    /*
+                    //if use the cookies to control the user login status
                     res.cookie('user', data, {maxAge: 60*60*1000});
-                    res.cookie('islogin', 1, {maxAge: 60*60*1000});
+                    res.cookie('islogin', 1, {maxAge: 60*60*1000});*/
+
+                    //use session in the memory
+                    req.session.user = data.username;
+                    req.session.islogin = 1;
+
                     callback({state:'ok'});
                 }else{
                     callback({state:'nopassword'});

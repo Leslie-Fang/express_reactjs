@@ -2,8 +2,13 @@ var express = require('express');
 var router = express.Router();
 var my=require('../databases/mysql_api');
 var bcrypt = require('bcrypt');
+var redis   = require("redis");
+var session = require('express-session');
+var redisStore = require('connect-redis')(session);
 var saltRounds = 10;
 
+/*
+//if use the cookies to control the user login status
 router.use('/main',function(req,res,next){
     if(req.cookies.islogin == 1){
         next();
@@ -11,6 +16,19 @@ router.use('/main',function(req,res,next){
     else{
         console.log('Not login!');
         console.log(req.cookies.islogin);
+        res.redirect('/login');
+    }
+});*/
+
+//use session in the memory
+router.use('/main',function(req,res,next){
+    console.log(req.session);
+    if(req.session.islogin == 1){
+        next();
+    }
+    else{
+        console.log('Not login!');
+        console.log(req.session.islogin);
         res.redirect('/login');
     }
 });
@@ -89,7 +107,6 @@ router.post('/signup', function(req, res, next) {
             return res.send(queryData);
         });
     });
-
 });
 
 module.exports = router;
