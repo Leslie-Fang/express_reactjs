@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-exports.signup = exports.submitData = undefined;
+exports.logout = exports.signup = exports.submitData = undefined;
 
 var _jquery = require("jquery");
 
@@ -56,6 +56,30 @@ var signup = exports.signup = function signup(username, password) {
             console.log('back in ajax!');
             var action = {
                 type: 'SIGNUP_ED',
+                state: 'finishFetchingdata',
+                payload: data
+            };
+            _store.store.dispatch(action);
+            return data;
+        })
+    };
+};
+
+var logout = exports.logout = function logout(username, password) {
+    console.log("logout");
+    return {
+        type: 'LOGOUT_ING',
+        state: 'isFetchingdata',
+        payload: _jquery2.default.ajax({
+            method: "POST",
+            data: {},
+            url: "/logout",
+            dataType: "json"
+        }).then(function (data) {
+            console.log(data);
+            console.log('back in ajax!');
+            var action = {
+                type: 'LOGOUT_ED',
                 state: 'finishFetchingdata',
                 payload: data
             };

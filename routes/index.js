@@ -109,4 +109,12 @@ router.post('/signup', function(req, res, next) {
     });
 });
 
+router.post('/logout', function(req, res, next) {
+    req.session.destroy(function(err) {
+        // session updated
+        return res.send({state:'confirm_logout'});
+    });
+
+});
+
 module.exports = router;

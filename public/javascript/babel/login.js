@@ -15,6 +15,10 @@ var _container = require("../babel/container/container1.js");
 
 var _container2 = _interopRequireDefault(_container);
 
+var _header = require("../babel/container/header.js");
+
+var _header2 = _interopRequireDefault(_header);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -71,6 +75,7 @@ var Board = function (_React$Component2) {
                 React.createElement(
                     "div",
                     { className: "container" },
+                    React.createElement(_header2.default, null),
                     React.createElement(Component1, null),
                     React.createElement(_container2.default, null)
                 )

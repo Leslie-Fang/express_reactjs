@@ -4,6 +4,7 @@
 import {Provider} from 'react-redux';
 import {store} from "../babel/store.js"
 import Container2 from "../babel/container/container2.js";
+import Header from "../babel/container/header.js";
 
 export class Component2 extends React.Component {
     constructor(props) {
@@ -26,6 +27,7 @@ class Board extends React.Component{
         return (
             <Provider store={store}>
                 <div className="container">
+                    <Header />
                     <Component2 />
                     <Container2 />
                 </div>

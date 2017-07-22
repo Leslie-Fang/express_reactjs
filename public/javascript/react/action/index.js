@@ -52,3 +52,27 @@ export const signup = (username,password) => {
         }))
     }
 };
+
+export const logout = (username,password) => {
+    console.log("logout");
+    return {
+        type: 'LOGOUT_ING',
+        state: 'isFetchingdata',
+        payload: ($.ajax({
+            method: "POST",
+            data: {},
+            url: "/logout",
+            dataType: "json"
+        }).then(function (data) {
+            console.log(data);
+            console.log('back in ajax!');
+            const action = {
+                type: 'LOGOUT_ED',
+                state: 'finishFetchingdata',
+                payload: data
+            };
+            store.dispatch(action);
+            return data;
+        }))
+    }
+};

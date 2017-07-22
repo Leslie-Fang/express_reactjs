@@ -1,0 +1,10 @@
+.black{
+    background-color: black;
+}
+.fixed {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 75px;
+    background-color: black;
+}

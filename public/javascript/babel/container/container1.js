@@ -115,7 +115,7 @@ var Container1 = function (_React$Component) {
                             { 'for': 'exampleInputPassword1' },
                             'Password'
                         ),
-                        React.createElement('input', { type: 'text', className: 'form-control', id: 'exampleInputPassword',
+                        React.createElement('input', { type: 'password', className: 'form-control', id: 'exampleInputPassword',
                             ref: 'verify',
                             value: this.state.passwordValue,
                             placeHolder: this.state.defaultPasswordValue,

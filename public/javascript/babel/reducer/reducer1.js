@@ -52,6 +52,21 @@ var users = exports.users = function users() {
                 window.location.href = '/login';
             }
             return Object.assign({}, action.payload);
+        case 'LOGOUT_ING':
+            console.log('try log out');
+            console.log(action.payload);
+            return Object.assign({}, action.payload);
+        case 'LOGOUT_ED':
+            console.log('LOGOUT_ED');
+            console.log(action.payload.state);
+            if (action.payload.state == 'confirm_logout') {
+                window.location.href = '/login';
+                alert('Log out. Please log in again');
+            } else {
+                window.location.href = '/login';
+                alert('Log out failed');
+            }
+            return Object.assign({}, action.payload);
         default:
             console.log('return the defalut userData');
             return userData;
