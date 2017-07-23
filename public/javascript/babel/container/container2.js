@@ -23,7 +23,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function mapStateToProps(state) {
     return {
-        users: state.users
+        login: state.login
     };
 }
 

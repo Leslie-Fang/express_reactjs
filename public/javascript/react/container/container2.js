@@ -7,7 +7,7 @@ import {signup} from '../../babel/action/index.js';
 
 function mapStateToProps(state) {
     return ({
-        users: state.users
+        login: state.login
     });
 }
 

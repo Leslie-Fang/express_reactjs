@@ -7244,7 +7244,7 @@ function verifySubselectors(mapStateToProps, mapDispatchToProps, mergeProps, dis
 
 
 Object.defineProperty(exports, "__esModule", {
-  value: true
+    value: true
 });
 
 var _redux = __webpack_require__(5);
@@ -7255,8 +7255,9 @@ var _reducer = __webpack_require__(81);
  * Created by leslie on 2017/7/19.
  */
 var allReducers = (0, _redux.combineReducers)({
-  users: _reducer.users
-
+    login: _reducer.login,
+    signup: _reducer.signup,
+    logout: _reducer.logout
 });
 
 exports.default = allReducers;
@@ -7284,7 +7285,58 @@ var userData = [{
     age: 100
 }];
 
-var users = exports.users = function users() {
+var logout = exports.logout = function logout() {
+    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+    var action = arguments[1];
+
+    switch (action.type) {
+        case 'LOGOUT_ING':
+            console.log('try log out');
+            console.log(action.payload);
+            return Object.assign({}, action.payload);
+        case 'LOGOUT_ED':
+            console.log('LOGOUT_ED');
+            console.log(action.payload.state);
+            if (action.payload.state == 'confirm_logout') {
+                window.location.href = '/login';
+                alert('Log out. Please log in again');
+            } else {
+                window.location.href = '/login';
+                alert('Log out failed');
+            }
+            return Object.assign({}, action.payload);
+        default:
+            console.log('return the defalut userData');
+            return null;
+    }
+};
+
+var signup = exports.signup = function signup() {
+    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+    var action = arguments[1];
+
+    switch (action.type) {
+        case 'SIGNUP_ING':
+            console.log('SUBMIT_SIGNUP_DATA');
+            console.log(action.payload);
+            return Object.assign({}, action.payload);
+        case 'SIGNUP_ED':
+            console.log('SIGNUP_ED');
+            console.log(action.payload.state);
+            if (action.payload.state == 'userExsit') {
+                window.location.href = '/signup';
+                alert('The username exsits, please select another one.');
+            } else if (action.payload.state == 'ok') {
+                window.location.href = '/login';
+            }
+            return Object.assign({}, action.payload);
+        default:
+            console.log('return the defalut userData');
+            return null;
+    }
+};
+
+var login = exports.login = function login() {
     var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : userData;
     var action = arguments[1];
 
@@ -7304,35 +7356,6 @@ var users = exports.users = function users() {
                 alert('Wrong password! please input again');
             } else if (action.payload.state == 'ok') {
                 window.location.href = '/main';
-            }
-            return Object.assign({}, action.payload);
-        case 'SIGNUP_ING':
-            console.log('SUBMIT_SIGNUP_DATA');
-            console.log(action.payload);
-            return Object.assign({}, action.payload);
-        case 'SIGNUP_ED':
-            console.log('SIGNUP_ED');
-            console.log(action.payload.state);
-            if (action.payload.state == 'userExsit') {
-                window.location.href = '/signup';
-                alert('The username exsits, please select another one.');
-            } else if (action.payload.state == 'ok') {
-                window.location.href = '/login';
-            }
-            return Object.assign({}, action.payload);
-        case 'LOGOUT_ING':
-            console.log('try log out');
-            console.log(action.payload);
-            return Object.assign({}, action.payload);
-        case 'LOGOUT_ED':
-            console.log('LOGOUT_ED');
-            console.log(action.payload.state);
-            if (action.payload.state == 'confirm_logout') {
-                window.location.href = '/login';
-                alert('Log out. Please log in again');
-            } else {
-                window.location.href = '/login';
-                alert('Log out failed');
             }
             return Object.assign({}, action.payload);
         default:
@@ -17807,7 +17830,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function mapStateToProps(state) {
     return {
-        users: state.users
+        login: state.login
     };
 }
 
