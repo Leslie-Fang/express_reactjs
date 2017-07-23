@@ -1,3 +1,4 @@
+博客[地址](https://leslie-fang.github.io/2017/07/23/%E5%9F%BA%E4%BA%8Eexpress%E5%92%8Creactjs%E5%BC%80%E5%8F%91%E7%9A%84web%E6%A1%86%E6%9E%B6/)
 ## 使用到的主要工具介绍
 * Express：基于nodejs的后端框架
 * Reactjs+Redux：前端框架，React更多的是扮演着MVC中的view的角色，Model以及Control类似的功能可以用flux或者更进一步用Redux来实现，[链接](https://github.com/buckyroberts/React-Redux-Boilerplate) 里面的图片将redux和reactjs之间的关系描述的很清楚
