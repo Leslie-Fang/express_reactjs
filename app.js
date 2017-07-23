@@ -21,7 +21,7 @@ var sessionOptions={
         client: client,
         ttl: 1800 //expire time to delete the session data store in the redis
     })  //without define of the store of redis instance, would use the memory as default
-}
+};
 
 //set the route of the views
 app.set('views','./views');
