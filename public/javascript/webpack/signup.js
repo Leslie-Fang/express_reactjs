@@ -17688,10 +17688,10 @@ var Header = function (_React$Component) {
         value: function render() {
             return React.createElement(
                 'div',
-                { className: 'black' },
+                { className: 'fixed' },
                 React.createElement(
                     'button',
-                    { type: 'submit', className: 'btn btn-primary fixed', onClick: this.onlogout },
+                    { type: 'submit', className: 'btn btn-primary logoutButton', onClick: this.onlogout },
                     'Logout'
                 )
             );
@@ -17756,12 +17756,13 @@ var Component2 = exports.Component2 = function (_React$Component) {
         value: function render() {
             return React.createElement(
                 "div",
-                null,
+                { className: "mainContent" },
                 React.createElement(
                     "h1",
                     { className: "text-center" },
                     "Signup"
-                )
+                ),
+                React.createElement(_container2.default, null)
             );
         }
     }]);
@@ -17788,8 +17789,7 @@ var Board = function (_React$Component2) {
                     "div",
                     { className: "container" },
                     React.createElement(_header2.default, null),
-                    React.createElement(Component2, null),
-                    React.createElement(_container2.default, null)
+                    React.createElement(Component2, null)
                 )
             );
         }
@@ -17902,10 +17902,10 @@ var Container2 = function (_React$Component) {
         value: function render() {
             return React.createElement(
                 'div',
-                null,
+                { className: 'mainTable' },
                 React.createElement(
                     'form',
-                    { className: 'text-center', onSubmit: this.handleSubmit },
+                    { onSubmit: this.handleSubmit },
                     React.createElement(
                         'div',
                         { className: 'form-group' },
@@ -17933,14 +17933,18 @@ var Container2 = function (_React$Component) {
                             onChange: this.handlepasswordChange })
                     ),
                     React.createElement(
-                        'button',
-                        { type: 'submit', className: 'btn btn-primary' },
-                        'signup'
-                    ),
-                    React.createElement(
-                        'a',
-                        { 'class': 'btn btn-default', href: '/main', role: 'button' },
-                        'Back to main page'
+                        'div',
+                        { className: 'text-center' },
+                        React.createElement(
+                            'button',
+                            { type: 'submit', className: 'btn btn-primary loginButton' },
+                            'signup'
+                        ),
+                        React.createElement(
+                            'a',
+                            { 'class': 'btn btn-default', href: '/main', role: 'button' },
+                            'Back to main page'
+                        )
                     )
                 )
             );

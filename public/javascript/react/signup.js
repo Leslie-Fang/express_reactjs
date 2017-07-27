@@ -12,8 +12,9 @@ export class Component2 extends React.Component {
     }
     render() {
         return (
-            <div>
+            <div className="mainContent">
                 <h1 className = "text-center">Signup</h1>
+                <Container2 />
             </div>
         );
     }
@@ -29,7 +30,6 @@ class Board extends React.Component{
                 <div className="container">
                     <Header />
                     <Component2 />
-                    <Container2 />
                 </div>
             </Provider>);
     }

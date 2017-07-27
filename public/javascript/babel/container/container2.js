@@ -95,10 +95,10 @@ var Container2 = function (_React$Component) {
         value: function render() {
             return React.createElement(
                 'div',
-                null,
+                { className: 'mainTable' },
                 React.createElement(
                     'form',
-                    { className: 'text-center', onSubmit: this.handleSubmit },
+                    { onSubmit: this.handleSubmit },
                     React.createElement(
                         'div',
                         { className: 'form-group' },
@@ -126,14 +126,18 @@ var Container2 = function (_React$Component) {
                             onChange: this.handlepasswordChange })
                     ),
                     React.createElement(
-                        'button',
-                        { type: 'submit', className: 'btn btn-primary' },
-                        'signup'
-                    ),
-                    React.createElement(
-                        'a',
-                        { 'class': 'btn btn-default', href: '/main', role: 'button' },
-                        'Back to main page'
+                        'div',
+                        { className: 'text-center' },
+                        React.createElement(
+                            'button',
+                            { type: 'submit', className: 'btn btn-primary loginButton' },
+                            'signup'
+                        ),
+                        React.createElement(
+                            'a',
+                            { 'class': 'btn btn-default', href: '/main', role: 'button' },
+                            'Back to main page'
+                        )
                     )
                 )
             );

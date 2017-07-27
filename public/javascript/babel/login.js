@@ -44,12 +44,13 @@ var Component1 = exports.Component1 = function (_React$Component) {
         value: function render() {
             return React.createElement(
                 "div",
-                null,
+                { className: "mainContent" },
                 React.createElement(
                     "h1",
                     { className: "text-center" },
                     "Login"
-                )
+                ),
+                React.createElement(_container2.default, null)
             );
         }
     }]);
@@ -76,8 +77,7 @@ var Board = function (_React$Component2) {
                     "div",
                     { className: "container" },
                     React.createElement(_header2.default, null),
-                    React.createElement(Component1, null),
-                    React.createElement(_container2.default, null)
+                    React.createElement(Component1, null)
                 )
             );
         }
