@@ -30,8 +30,8 @@ class Header extends React.Component {
     }
     render() {
         return(
-            <div className="black">
-                <button type="submit" className="btn btn-primary fixed" onClick={this.onlogout}>Logout</button>
+            <div className="fixed">
+                <button type="submit" className="btn btn-primary logoutButton" onClick={this.onlogout}>Logout</button>
             </div>
         );
     }

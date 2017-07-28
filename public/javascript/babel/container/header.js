@@ -57,10 +57,10 @@ var Header = function (_React$Component) {
         value: function render() {
             return React.createElement(
                 'div',
-                { className: 'black' },
+                { className: 'fixed' },
                 React.createElement(
                     'button',
-                    { type: 'submit', className: 'btn btn-primary fixed', onClick: this.onlogout },
+                    { type: 'submit', className: 'btn btn-primary logoutButton', onClick: this.onlogout },
                     'Logout'
                 )
             );

@@ -58,8 +58,8 @@ class Container1 extends React.Component {
     }
     render() {
         return(
-            <div>
-                <form className = "text-center" onSubmit={this.handleSubmit}>
+            <div className="mainTable">
+                <form onSubmit={this.handleSubmit}>
                     <div className="form-group">
                         <label for="exampleInputPassword1">Username</label>
                         <input type="text" className="form-control" id="exampleInputUsername"
@@ -76,9 +76,10 @@ class Container1 extends React.Component {
                                onFocus={this.handlepasswordFocus}
                                onChange={this.handlepasswordChange}/>
                     </div>
-                    <button type="submit" className="btn btn-primary">Login</button>
-
-                    <a class="btn btn-default" href="/signup" role="button">New User Signup</a>
+                    <div className="text-center">
+                        <button type="submit" className="btn btn-primary loginButton ">Login</button>
+                        <a class="btn btn-default" href="/signup" role="button">New User Signup</a>
+                    </div>
                 </form>
             </div>
         );
