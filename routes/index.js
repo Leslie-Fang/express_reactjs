@@ -21,7 +21,7 @@ router.use('/main',function(req,res,next){
 });*/
 
 //use session in the memory
-router.use('/main',function(req,res,next){
+router.use('/myCenter',function(req,res,next){
     console.log(req.session);
     if(req.session.islogin == 1){
         next();
@@ -33,9 +33,14 @@ router.use('/main',function(req,res,next){
     }
 });
 
-router.get('/main',function(req,res){
+router.get('/',function(req,res){
     //res.render("login");
-    res.send("main");
+    res.render("main");
+});
+
+router.get('/myCenter',function(req,res){
+    //res.render("login");
+    res.send("This is my personal center page.");
 });
 
 router.get('/login',function(req,res){

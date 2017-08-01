@@ -51,7 +51,7 @@ exports.checkpassword=function(req, data,res,callback){
                     req.session.user = data.username;
                     req.session.islogin = 1;
 
-                    callback({state:'ok'});
+                    callback({state:'ok',user:data.username});
                 }else{
                     callback({state:'nopassword'});
                 }

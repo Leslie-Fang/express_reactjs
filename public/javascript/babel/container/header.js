@@ -23,7 +23,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function mapStateToProps(state) {
     return {
-        users: state.users
+        login: state.login
     };
 }
 
@@ -39,8 +39,10 @@ var Header = function (_React$Component) {
 
         var _this = _possibleConstructorReturn(this, (Header.__proto__ || Object.getPrototypeOf(Header)).call(this, props));
 
-        _this.state = { userNameValue: "please enter username", defaultUserNameValue: "please enter username",
-            passwordValue: "please enter password", defaultPasswordValue: "please enter password" };
+        _this.state = { userNameValue: _this.props.login };
+        console.log("==============>");
+        console.log(_this.props.login);
+        console.log(_this.state.userNameValue);
         _this.onlogout = _this.onlogout.bind(_this);
         return _this;
     }
@@ -58,6 +60,17 @@ var Header = function (_React$Component) {
             return React.createElement(
                 'div',
                 { className: 'fixed' },
+                this.state.userNameValue,
+                React.createElement(
+                    'a',
+                    { 'class': 'btn btn-default', href: '/login', role: 'button' },
+                    ' login '
+                ),
+                React.createElement(
+                    'a',
+                    { 'class': 'btn btn-default', href: '/signup', role: 'button' },
+                    ' signup '
+                ),
                 React.createElement(
                     'button',
                     { type: 'submit', className: 'btn btn-primary logoutButton', onClick: this.onlogout },

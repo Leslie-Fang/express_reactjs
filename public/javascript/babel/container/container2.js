@@ -135,7 +135,7 @@ var Container2 = function (_React$Component) {
                         ),
                         React.createElement(
                             'a',
-                            { 'class': 'btn btn-default', href: '/main', role: 'button' },
+                            { 'class': 'btn btn-default', href: '/', role: 'button' },
                             'Back to main page'
                         )
                     )

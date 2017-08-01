@@ -1,0 +1,22 @@
+.mainContent {
+    position: absolute;
+    top: 60px;
+    background-color: darkgray;
+    left: 10%;
+    right: 10%;
+
+}
+
+.mainTable {
+    position: relative;
+    width: 50%;
+    left: 25%;
+    font-size: 1em;
+    color: #000;
+    font-family: Times New Roman !important;
+}
+
+.loginButton{
+    position: relative;
+    margin: 10px;
+}

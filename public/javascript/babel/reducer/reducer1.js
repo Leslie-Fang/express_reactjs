@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 Object.defineProperty(exports, "__esModule", {
     value: true
@@ -6,15 +6,7 @@ Object.defineProperty(exports, "__esModule", {
 /**
  * Created by leslie on 2017/7/19.
  */
-var userData = [{
-    id: 1,
-    first: "Leslie",
-    age: 10
-}, {
-    id: 3,
-    first: "Bob",
-    age: 100
-}];
+var userData = "Vistor";
 
 var logout = exports.logout = function logout() {
     var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
@@ -37,7 +29,7 @@ var logout = exports.logout = function logout() {
             }
             return Object.assign({}, action.payload);
         default:
-            console.log('return the defalut userData');
+            console.log('return the defalut logoutData');
             return null;
     }
 };
@@ -62,7 +54,7 @@ var signup = exports.signup = function signup() {
             }
             return Object.assign({}, action.payload);
         default:
-            console.log('return the defalut userData');
+            console.log('return the defalut signupData');
             return null;
     }
 };
@@ -86,11 +78,16 @@ var login = exports.login = function login() {
                 window.location.href = '/login';
                 alert('Wrong password! please input again');
             } else if (action.payload.state == 'ok') {
-                window.location.href = '/main';
+                window.location.href = '/';
             }
-            return Object.assign({}, action.payload);
+            userData = action.payload.user;
+            console.log(action.payload.user);
+            console.log(userData);
+            //return action.payload.user;
+            return Object.assign({}, state, action.payload.user);
         default:
-            console.log('return the defalut userData');
-            return userData;
+            console.log('return the defalut loginData');
+            console.log(state);
+            return state;
     }
 };

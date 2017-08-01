@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-exports.Component2 = undefined;
+exports.ComponentMain = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -11,13 +11,13 @@ var _reactRedux = require("react-redux");
 
 var _store = require("../babel/store.js");
 
-var _container = require("../babel/container/container2.js");
-
-var _container2 = _interopRequireDefault(_container);
-
 var _header = require("../babel/container/header.js");
 
 var _header2 = _interopRequireDefault(_header);
+
+var _containerMain = require("../babel/container/containerMain.js");
+
+var _containerMain2 = _interopRequireDefault(_containerMain);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -30,16 +30,16 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 */
 
 
-var Component2 = exports.Component2 = function (_React$Component) {
-    _inherits(Component2, _React$Component);
+var ComponentMain = exports.ComponentMain = function (_React$Component) {
+    _inherits(ComponentMain, _React$Component);
 
-    function Component2(props) {
-        _classCallCheck(this, Component2);
+    function ComponentMain(props) {
+        _classCallCheck(this, ComponentMain);
 
-        return _possibleConstructorReturn(this, (Component2.__proto__ || Object.getPrototypeOf(Component2)).call(this, props));
+        return _possibleConstructorReturn(this, (ComponentMain.__proto__ || Object.getPrototypeOf(ComponentMain)).call(this, props));
     }
 
-    _createClass(Component2, [{
+    _createClass(ComponentMain, [{
         key: "render",
         value: function render() {
             return React.createElement(
@@ -48,14 +48,14 @@ var Component2 = exports.Component2 = function (_React$Component) {
                 React.createElement(
                     "h1",
                     { className: "text-center" },
-                    "Signup"
+                    "Main Page"
                 ),
-                React.createElement(_container2.default, null)
+                React.createElement(_containerMain2.default, null)
             );
         }
     }]);
 
-    return Component2;
+    return ComponentMain;
 }(React.Component);
 
 var Board = function (_React$Component2) {
@@ -76,7 +76,8 @@ var Board = function (_React$Component2) {
                 React.createElement(
                     "div",
                     { className: "container" },
-                    React.createElement(Component2, null)
+                    React.createElement(_header2.default, null),
+                    React.createElement(ComponentMain, null)
                 )
             );
         }

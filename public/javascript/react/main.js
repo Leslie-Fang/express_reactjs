@@ -3,18 +3,18 @@
  */
 import {Provider} from 'react-redux';
 import {store} from "../babel/store.js"
-import Container2 from "../babel/container/container2.js";
 import Header from "../babel/container/header.js";
+import ContainerMain from "../babel/container/containerMain.js";
 
-export class Component2 extends React.Component {
+export class ComponentMain extends React.Component {
     constructor(props) {
         super(props);
     }
     render() {
         return (
             <div className="mainContent">
-                <h1 className = "text-center">Signup</h1>
-                <Container2 />
+                <h1 className = "text-center">Main Page</h1>
+                <ContainerMain />
             </div>
         );
     }
@@ -28,7 +28,8 @@ class Board extends React.Component{
         return (
             <Provider store={store}>
                 <div className="container">
-                    <Component2 />
+                    <Header />
+                    <ComponentMain />
                 </div>
             </Provider>);
     }

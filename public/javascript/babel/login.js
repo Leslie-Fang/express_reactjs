@@ -76,7 +76,6 @@ var Board = function (_React$Component2) {
                 React.createElement(
                     "div",
                     { className: "container" },
-                    React.createElement(_header2.default, null),
                     React.createElement(Component1, null)
                 )
             );

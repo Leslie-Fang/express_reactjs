@@ -7275,15 +7275,7 @@ Object.defineProperty(exports, "__esModule", {
 /**
  * Created by leslie on 2017/7/19.
  */
-var userData = [{
-    id: 1,
-    first: "Leslie",
-    age: 10
-}, {
-    id: 3,
-    first: "Bob",
-    age: 100
-}];
+var userData = "Vistor";
 
 var logout = exports.logout = function logout() {
     var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
@@ -7306,7 +7298,7 @@ var logout = exports.logout = function logout() {
             }
             return Object.assign({}, action.payload);
         default:
-            console.log('return the defalut userData');
+            console.log('return the defalut logoutData');
             return null;
     }
 };
@@ -7331,7 +7323,7 @@ var signup = exports.signup = function signup() {
             }
             return Object.assign({}, action.payload);
         default:
-            console.log('return the defalut userData');
+            console.log('return the defalut signupData');
             return null;
     }
 };
@@ -7355,12 +7347,17 @@ var login = exports.login = function login() {
                 window.location.href = '/login';
                 alert('Wrong password! please input again');
             } else if (action.payload.state == 'ok') {
-                window.location.href = '/main';
+                window.location.href = '/';
             }
-            return Object.assign({}, action.payload);
+            userData = action.payload.user;
+            console.log(action.payload.user);
+            console.log(userData);
+            //return action.payload.user;
+            return Object.assign({}, state, action.payload.user);
         default:
-            console.log('return the defalut userData');
-            return userData;
+            console.log('return the defalut loginData');
+            console.log(state);
+            return state;
     }
 };
 
@@ -17654,7 +17651,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function mapStateToProps(state) {
     return {
-        users: state.users
+        login: state.login
     };
 }
 
@@ -17670,8 +17667,10 @@ var Header = function (_React$Component) {
 
         var _this = _possibleConstructorReturn(this, (Header.__proto__ || Object.getPrototypeOf(Header)).call(this, props));
 
-        _this.state = { userNameValue: "please enter username", defaultUserNameValue: "please enter username",
-            passwordValue: "please enter password", defaultPasswordValue: "please enter password" };
+        _this.state = { userNameValue: _this.props.login };
+        console.log("==============>");
+        console.log(_this.props.login);
+        console.log(_this.state.userNameValue);
         _this.onlogout = _this.onlogout.bind(_this);
         return _this;
     }
@@ -17689,6 +17688,17 @@ var Header = function (_React$Component) {
             return React.createElement(
                 'div',
                 { className: 'fixed' },
+                this.state.userNameValue,
+                React.createElement(
+                    'a',
+                    { 'class': 'btn btn-default', href: '/login', role: 'button' },
+                    ' login '
+                ),
+                React.createElement(
+                    'a',
+                    { 'class': 'btn btn-default', href: '/signup', role: 'button' },
+                    ' signup '
+                ),
                 React.createElement(
                     'button',
                     { type: 'submit', className: 'btn btn-primary logoutButton', onClick: this.onlogout },
@@ -17788,7 +17798,6 @@ var Board = function (_React$Component2) {
                 React.createElement(
                     "div",
                     { className: "container" },
-                    React.createElement(_header2.default, null),
                     React.createElement(Component2, null)
                 )
             );
@@ -17942,7 +17951,7 @@ var Container2 = function (_React$Component) {
                         ),
                         React.createElement(
                             'a',
-                            { 'class': 'btn btn-default', href: '/main', role: 'button' },
+                            { 'class': 'btn btn-default', href: '/', role: 'button' },
                             'Back to main page'
                         )
                     )
