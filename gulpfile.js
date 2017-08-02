@@ -8,6 +8,7 @@ var Paths = {
     routes_src:'routes/*.js',
     routes_dest:'build/routes',
     html_src:'views/**',
+    css_src:'public/css/**',
     react_src:'public/javascript/react/**/*.js',
     react_dest: 'public/javascript/babel',
     gulp_src:'./gulpfile.js',
@@ -44,7 +45,7 @@ gulp.task( 'server.restart', function() {
 });
 
 gulp.task('watch',function(){
-    gulp.watch([Paths.routes_src,Paths.html_src,Paths.react_src,Paths.gulp_src,Paths.dataBase_API],['routes','babel','webpack','server.restart']);
+    gulp.watch([Paths.routes_src,Paths.html_src,Paths.css_src,Paths.react_src,Paths.gulp_src,Paths.dataBase_API],['routes','babel','webpack','server.restart']);
 });
 
 gulp.task('default', ['routes','babel','webpack','server:start','watch']);

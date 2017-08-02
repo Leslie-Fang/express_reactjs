@@ -14,7 +14,8 @@ var _reducer = require('./reducer1.js');
 var allReducers = (0, _redux.combineReducers)({
     login: _reducer.login,
     signup: _reducer.signup,
-    logout: _reducer.logout
+    logout: _reducer.logout,
+    headerInitState: _reducer.headerInitState
 });
 
 exports.default = allReducers;
