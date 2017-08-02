@@ -11,9 +11,16 @@
 
 .logoutButton{
     position: relative;
-    top: 10px;
     width: 75px;
     left: 75%;
+    margin: 10px;
+}
+
+.login{
+    position: relative;
+    width: 75px;
+    left: 80%;
+    margin: 10px;
 }
 
 

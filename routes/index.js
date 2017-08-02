@@ -115,6 +115,7 @@ router.post('/signup', function(req, res, next) {
 });
 
 router.post('/logout', function(req, res, next) {
+    res.clearCookie("username");
     req.session.destroy(function(err) {
         // session updated
         return res.send({state:'confirm_logout'});

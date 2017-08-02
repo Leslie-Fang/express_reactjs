@@ -3,26 +3,31 @@
  */
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import {logout} from '../../babel/action/index.js';
+import {logout,headerInit} from '../../babel/action/index.js';
+import Cookies from 'universal-cookie';
+import {store} from "../../babel/store.js"
 
 function mapStateToProps(state) {
     return ({
-        login: state.login
+        login: state.login,
+        headerInitState: state.headerInitState
     });
 }
 
 function matchDispatchToProps(dispatch){
-    return bindActionCreators({logout:logout}, dispatch);
+    return bindActionCreators({logout:logout,headerInit:headerInit}, dispatch);
 }
 
 class Header extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {userNameValue:this.props.login};
-        console.log("==============>");
-        console.log(this.props.login);
+        this.state = {userNameValue:this.props.headerInitState};
+      /*  console.log("==============>");
+        console.log(this.props.headerInitState);
         console.log(this.state.userNameValue);
+        console.log("2==============>");*/
         this.onlogout = this.onlogout.bind(this);
+        this.props.headerInit("Vistor");
     }
     onlogout(event){
         event.preventDefault();
@@ -30,14 +35,34 @@ class Header extends React.Component {
         this.props.logout();
     }
     render() {
-        return(
-            <div className="fixed">
-                {this.state.userNameValue}
-                <a class="btn btn-default" href="/login" role="button"> login </a>
-                <a class="btn btn-default" href="/signup" role="button"> signup </a>
-                <button type="submit" className="btn btn-primary logoutButton" onClick={this.onlogout}>Logout</button>
-            </div>
-        );
+        //console.log("bbbbbb");
+       // console.log(this.props.user);
+        const cookies = new Cookies();
+      /*  cookies.set('username', 'Pacman', { path: '/' });
+        console.log(cookies.get('username'));*/
+        console.log(cookies.get('username'));
+       /* console.log(this.state.userNameValue);
+        console.log("store.getState().headerInitState");
+        console.log(store.getState().headerInitState);*/
+        if(cookies.get('username')){
+            //this.state.userNameValue = cookies.get('username');
+            return(
+                <div className="fixed">
+                    {store.getState().headerInitState}
+                    <a className="logoutButton" href="/" role="button"> Main </a>
+                    <button type="submit" className="btn btn-primary logoutButton" onClick={this.onlogout}>Logout</button>
+                </div>
+            );
+        }else{
+            //this.state.userNameValue = this.props.login;
+            return(
+                <div className="fixed">
+                    {store.getState().headerInitState}
+                    <a className="login" href="/login" role="button"> Login </a>
+                    <a className="login" href="/signup" role="button"> Signup </a>
+                </div>
+            );
+        }
     }
 }
 

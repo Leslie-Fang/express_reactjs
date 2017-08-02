@@ -29,7 +29,7 @@ var logout = exports.logout = function logout() {
             }
             return Object.assign({}, action.payload);
         default:
-            console.log('return the defalut logoutData');
+            console.log('return the defalut logoutData', state, 'and action', action);
             return null;
     }
 };
@@ -54,7 +54,7 @@ var signup = exports.signup = function signup() {
             }
             return Object.assign({}, action.payload);
         default:
-            console.log('return the defalut signupData');
+            console.log('return the defalut signupData', state, 'and action', action);
             return null;
     }
 };
@@ -80,14 +80,29 @@ var login = exports.login = function login() {
             } else if (action.payload.state == 'ok') {
                 window.location.href = '/';
             }
-            userData = action.payload.user;
+            console.log("Sure =============> GET_VERYFY_DATA", state, 'and action', action);
             console.log(action.payload.user);
-            console.log(userData);
+            console.log(Object.assign({}, state, { username: action.payload.user }));
             //return action.payload.user;
             return Object.assign({}, state, action.payload.user);
         default:
-            console.log('return the defalut loginData');
+            console.log('return the defalut loginData', state, 'and action', action);
             console.log(state);
+            return state;
+    }
+};
+
+var headerInitState = exports.headerInitState = function headerInitState() {
+    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+    var action = arguments[1];
+
+    switch (action.type) {
+        case 'HEADER_INIT':
+            console.log('return the HEADER_INIT pageInit', state, 'and action', action);
+            console.log(action.payload.username);
+            return action.payload.username;
+        default:
+            console.log('return the defalut pageInit', state, 'and action', action);
             return state;
     }
 };

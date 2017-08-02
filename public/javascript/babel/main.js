@@ -70,14 +70,17 @@ var Board = function (_React$Component2) {
     _createClass(Board, [{
         key: "render",
         value: function render() {
+            console.log("asda");
+            console.log(_store.store.getState());
+            console.log(_store.store.getState().headerInitState);
             return React.createElement(
                 _reactRedux.Provider,
                 { store: _store.store },
                 React.createElement(
                     "div",
                     { className: "container" },
-                    React.createElement(_header2.default, null),
-                    React.createElement(ComponentMain, null)
+                    React.createElement(_header2.default, { user: _store.store.getState().headerInitState }),
+                    React.createElement(ComponentMain, { user: _store.store.getState().headerInitState })
                 )
             );
         }

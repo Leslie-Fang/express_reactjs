@@ -1,5 +1,7 @@
 import $ from 'jquery';
 import {store} from "../../babel/store.js"
+import Cookies from 'universal-cookie';
+const cookies = new Cookies();
 
 export const submitData = (username,password) => {
     console.log("log codedata");
@@ -74,5 +76,18 @@ export const logout = (username,password) => {
             store.dispatch(action);
             return data;
         }))
+    }
+};
+
+export const headerInit = (myUserName) => {
+    console.log("headerInit");
+    console.log(myUserName);
+    if(cookies.get('username')){
+        myUserName = cookies.get('username');
+    }
+    return {
+        type: 'HEADER_INIT',
+        state: 'isFetchingdata',
+        payload: {username:myUserName}
     }
 };
