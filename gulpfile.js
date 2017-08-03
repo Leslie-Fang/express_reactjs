@@ -12,7 +12,9 @@ var Paths = {
     react_src:'public/javascript/react/**/*.js',
     react_dest: 'public/javascript/babel',
     gulp_src:'./gulpfile.js',
-    dataBase_API:'./databases/mysql_api.js'
+    dataBase_API:'./databases/mysql_api.js',
+    reactMain_src:'public/javascript/webpack/*.js',
+    reactMain_dest:'public/javascript/production'
 
 };
 
@@ -35,6 +37,13 @@ gulp.task('webpack', function (cb) {
         cb(err);
     });
 });
+
+gulp.task('reactMainJs',function(){
+    gulp.src(Paths.reactMain_src)
+        .pipe(uglify())
+        .pipe(gulp.dest(Paths.reactMain_dest));
+});
+
 // run server
 gulp.task( 'server:start', function() {
     server.listen( { path: './app.js' } );
@@ -46,7 +55,7 @@ gulp.task( 'server.restart', function() {
 });
 
 gulp.task('watch',function(){
-    gulp.watch([Paths.routes_src,Paths.html_src,Paths.css_src,Paths.react_src,Paths.gulp_src,Paths.dataBase_API],['routes','babel','webpack','server.restart']);
+    gulp.watch([Paths.routes_src,Paths.html_src,Paths.css_src,Paths.react_src,Paths.gulp_src,Paths.dataBase_API],['routes','babel','webpack','reactMainJs','server.restart']);
 });
 
-gulp.task('default', ['routes','babel','webpack','server:start','watch']);
+gulp.task('default', ['routes','babel','webpack','reactMainJs','server:start','watch']);
