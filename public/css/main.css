@@ -3,5 +3,10 @@
     top: 60px;
     left: 10%;
     right: 10%;
+}
 
+.commentButton{
+    position: relative;
+    width: 100px;
+    margin: 10px;
 }

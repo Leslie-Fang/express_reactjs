@@ -91,3 +91,13 @@ export const headerInit = (myUserName) => {
         payload: {username:myUserName}
     }
 };
+
+export const addComment = () => {
+    console.log("addComment");
+    console.log();
+    return {
+        type: 'ADD_COMMENT',
+        state: 'isFetchingdata',
+        payload: {comment:"addComment"}
+    }
+};

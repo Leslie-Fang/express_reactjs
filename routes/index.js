@@ -22,13 +22,13 @@ router.use('/main',function(req,res,next){
 
 //use session in the memory
 router.use('/myCenter',function(req,res,next){
-    console.log(req.session);
+    //console.log(req.session);
     if(req.session.islogin == 1){
         next();
     }
     else{
-        console.log('Not login!');
-        console.log(req.session.islogin);
+        //console.log('Not login!');
+        //console.log(req.session.islogin);
         res.redirect('/login');
     }
 });
@@ -52,13 +52,13 @@ router.get('/signup',function(req,res){
 });
 
 router.post('/login', function(req, res, next) {
-    console.log(req.param('username'));
-    console.log(req.param('password'));
+    //console.log(req.param('username'));
+    //console.log(req.param('password'));
     var data = {username:req.param('username'),password:req.param('password')};
-    console.log(data);
+    //console.log(data);
     my.validateifUserExist(req,data,res,function(queryData){
-        console.log(queryData);
-        console.log('In callback!');
+        //console.log(queryData);
+        //console.log('In callback!');
         //didn't find the user return novoter
         if(queryData.state == 'nouser')
         {
@@ -68,26 +68,26 @@ router.post('/login', function(req, res, next) {
         }
     });
 },function(req, res){
-    console.log('checkout password!');
-    console.log(req.param('username'));
-    console.log(req.param('password'));
+    //console.log('checkout password!');
+    //console.log(req.param('username'));
+    //console.log(req.param('password'));
     var data = {username:req.param('username'),password:req.param('password')};
     my.checkpassword(req,data,res,function(queryData){
-        console.log(queryData);
-        console.log('In callback!');
+        //console.log(queryData);
+        //console.log('In callback!');
         //didn't find the user return novoter
         return res.send(queryData);
     });
 });
 
 router.post('/signup', function(req, res, next) {
-    console.log(req.param('username'));
-    console.log(req.param('password'));
+    //console.log(req.param('username'));
+    //console.log(req.param('password'));
     var data = {username:req.param('username'),password:req.param('password')};
-    console.log(data);
+    //console.log(data);
     my.validateifUserExist(req,data,res,function(queryData){
-        console.log(queryData);
-        console.log('In callback!');
+        //console.log(queryData);
+        //console.log('In callback!');
         //didn't find the user return novoter
         if(queryData.state == 'nouser')
         {
@@ -100,14 +100,14 @@ router.post('/signup', function(req, res, next) {
     });
 },function(req, res){
     bcrypt.hash(req.param('password'), saltRounds, function(err, hash) {
-        console.log('save new user');
+        /*console.log('save new user');
         console.log(req.param('username'));
         console.log(req.param('password'));
-        console.log(hash);
+        console.log(hash);*/
         var data = {username:req.param('username'),password:hash};
         my.saveuser(req,data,res,function(queryData){
-            console.log(queryData);
-            console.log('In callback!');
+            //console.log(queryData);
+            //console.log('In callback!');
             //didn't find the user return novoter
             return res.send(queryData);
         });

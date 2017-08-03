@@ -3604,7 +3604,7 @@ function verifyPlainObject(value, displayName, methodName) {
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-exports.headerInit = exports.logout = exports.signup = exports.submitData = undefined;
+exports.addComment = exports.headerInit = exports.logout = exports.signup = exports.submitData = undefined;
 
 var _jquery = __webpack_require__(83);
 
@@ -3706,6 +3706,16 @@ var headerInit = exports.headerInit = function headerInit(myUserName) {
         type: 'HEADER_INIT',
         state: 'isFetchingdata',
         payload: { username: myUserName }
+    };
+};
+
+var addComment = exports.addComment = function addComment() {
+    console.log("addComment");
+    console.log();
+    return {
+        type: 'ADD_COMMENT',
+        state: 'isFetchingdata',
+        payload: { comment: "addComment" }
     };
 };
 
@@ -7319,17 +7329,17 @@ Object.defineProperty(exports, "__esModule", {
 var userData = "Vistor";
 
 var logout = exports.logout = function logout() {
-    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : { logout: null };
     var action = arguments[1];
 
     switch (action.type) {
         case 'LOGOUT_ING':
             console.log('try log out');
-            console.log(action.payload);
-            return Object.assign({}, action.payload);
+            //console.log(action.payload);
+            return Object.assign({}, state, { logout: action.payload });
         case 'LOGOUT_ED':
             console.log('LOGOUT_ED');
-            console.log(action.payload.state);
+            //console.log(action.payload.state);
             if (action.payload.state == 'confirm_logout') {
                 window.location.href = '/login';
                 alert('Log out. Please log in again');
@@ -7337,50 +7347,50 @@ var logout = exports.logout = function logout() {
                 window.location.href = '/login';
                 alert('Log out failed');
             }
-            return Object.assign({}, action.payload);
+            return Object.assign({}, state, { logout: action.payload });
         default:
             console.log('return the defalut logoutData', state, 'and action', action);
-            return null;
+            return state;
     }
 };
 
 var signup = exports.signup = function signup() {
-    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : { signip: null };
     var action = arguments[1];
 
     switch (action.type) {
         case 'SIGNUP_ING':
             console.log('SUBMIT_SIGNUP_DATA');
-            console.log(action.payload);
-            return Object.assign({}, action.payload);
+            //console.log(action.payload);
+            return Object.assign({}, state, { signup: action.payload });
         case 'SIGNUP_ED':
             console.log('SIGNUP_ED');
-            console.log(action.payload.state);
+            //console.log(action.payload.state);
             if (action.payload.state == 'userExsit') {
                 window.location.href = '/signup';
                 alert('The username exsits, please select another one.');
             } else if (action.payload.state == 'ok') {
                 window.location.href = '/login';
             }
-            return Object.assign({}, action.payload);
+            return Object.assign({}, state, { signup: action.payload });
         default:
             console.log('return the defalut signupData', state, 'and action', action);
-            return null;
+            return state;
     }
 };
 
 var login = exports.login = function login() {
-    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : userData;
+    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : { login: userData };
     var action = arguments[1];
 
     switch (action.type) {
         case 'SUBMIT_DATA':
             console.log('SUBMIT_DATA');
-            console.log(action.payload);
-            return Object.assign({}, action.payload);
+            //console.log(action.payload);
+            return Object.assign({}, state, { login: action.payload.user });
         case 'GET_VERYFY_DATA':
             console.log('GET_VERYFY_DATA');
-            console.log(action.payload.state);
+            //console.log(action.payload.state);
             if (action.payload.state == 'nouser') {
                 window.location.href = '/signup';
                 alert('user does not exsit, please signup');
@@ -7391,26 +7401,27 @@ var login = exports.login = function login() {
                 window.location.href = '/';
             }
             console.log("Sure =============> GET_VERYFY_DATA", state, 'and action', action);
-            console.log(action.payload.user);
-            console.log(Object.assign({}, state, { username: action.payload.user }));
+            //console.log(action.payload.user);
+            //console.log(Object.assign({},state,{username:action.payload.user}));
             //return action.payload.user;
-            return Object.assign({}, state, action.payload.user);
+            return Object.assign({}, state, { login: action.payload.user });
         default:
             console.log('return the defalut loginData', state, 'and action', action);
-            console.log(state);
+            //console.log(state);
             return state;
     }
 };
 
 var headerInitState = exports.headerInitState = function headerInitState() {
-    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : { username: null };
     var action = arguments[1];
 
     switch (action.type) {
         case 'HEADER_INIT':
             console.log('return the HEADER_INIT pageInit', state, 'and action', action);
-            console.log(action.payload.username);
-            return action.payload.username;
+            //console.log(action.payload.username);
+            //console.log(Object.assign({},state,{username:action.payload.username}));
+            return Object.assign({}, state, { username: action.payload.username });
         default:
             console.log('return the defalut pageInit', state, 'and action', action);
             return state;
@@ -18216,18 +18227,19 @@ var Header = function (_React$Component) {
             //console.log("bbbbbb");
             // console.log(this.props.user);
             var cookies = new _universalCookie2.default();
-            /*  cookies.set('username', 'Pacman', { path: '/' });
-              console.log(cookies.get('username'));*/
-            console.log(cookies.get('username'));
-            /* console.log(this.state.userNameValue);
-             console.log("store.getState().headerInitState");
-             console.log(store.getState().headerInitState);*/
+            /*cookies.set('username', 'Pacman', { path: '/' });
+              console.log(cookies.get('username'));
+              console.log(cookies.get('username'));
+              console.log(this.state.userNameValue);
+              console.log("store.getState().headerInitState.username");
+              console.log(store.getState().headerInitState);
+              console.log(store.getState().headerInitState.username);*/
             if (cookies.get('username')) {
                 //this.state.userNameValue = cookies.get('username');
                 return React.createElement(
                     'div',
                     { className: 'fixed' },
-                    _store.store.getState().headerInitState,
+                    _store.store.getState().headerInitState.username,
                     React.createElement(
                         'a',
                         { className: 'logoutButton', href: '/', role: 'button' },
@@ -18244,7 +18256,7 @@ var Header = function (_React$Component) {
                 return React.createElement(
                     'div',
                     { className: 'fixed' },
-                    _store.store.getState().headerInitState,
+                    _store.store.getState().headerInitState.username,
                     React.createElement(
                         'a',
                         { className: 'login', href: '/login', role: 'button' },
@@ -18346,9 +18358,9 @@ var Board = function (_React$Component2) {
     _createClass(Board, [{
         key: "render",
         value: function render() {
-            console.log("asda");
-            console.log(_store.store.getState());
-            console.log(_store.store.getState().headerInitState);
+            //console.log("asda");
+            //console.log(store.getState());
+            //console.log(store.getState().headerInitState);
             return React.createElement(
                 _reactRedux.Provider,
                 { store: _store.store },
@@ -18384,7 +18396,7 @@ var _reactRedux = __webpack_require__(10);
 
 var _redux = __webpack_require__(5);
 
-__webpack_require__(35);
+var _index = __webpack_require__(35);
 
 var _store = __webpack_require__(9);
 
@@ -18403,7 +18415,7 @@ function mapStateToProps(state) {
 }
 
 function matchDispatchToProps(dispatch) {
-    return (0, _redux.bindActionCreators)({}, dispatch);
+    return (0, _redux.bindActionCreators)({ addComment: _index.addComment }, dispatch);
 }
 
 var ContainerMain = function (_React$Component) {
@@ -18415,10 +18427,18 @@ var ContainerMain = function (_React$Component) {
         var _this = _possibleConstructorReturn(this, (ContainerMain.__proto__ || Object.getPrototypeOf(ContainerMain)).call(this, props));
 
         _this.state = { username: "Vistor" };
+        _this.onaddComment = _this.onaddComment.bind(_this);
         return _this;
     }
 
     _createClass(ContainerMain, [{
+        key: 'onaddComment',
+        value: function onaddComment(event) {
+            event.preventDefault();
+            console.log("On add comment!");
+            this.props.addComment();
+        }
+    }, {
         key: 'render',
         value: function render() {
             /*const cookies = new Cookies();
@@ -18441,7 +18461,12 @@ var ContainerMain = function (_React$Component) {
                     'div',
                     null,
                     'hi,',
-                    _store.store.getState().headerInitState
+                    _store.store.getState().headerInitState.username
+                ),
+                React.createElement(
+                    'button',
+                    { className: 'btn btn-primary commentButton', onClick: this.onaddComment },
+                    'Comment'
                 )
             );
         }

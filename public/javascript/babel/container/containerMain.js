@@ -10,7 +10,7 @@ var _reactRedux = require('react-redux');
 
 var _redux = require('redux');
 
-require('../../babel/action/index.js');
+var _index = require('../../babel/action/index.js');
 
 var _store = require('../../babel/store.js');
 
@@ -29,7 +29,7 @@ function mapStateToProps(state) {
 }
 
 function matchDispatchToProps(dispatch) {
-    return (0, _redux.bindActionCreators)({}, dispatch);
+    return (0, _redux.bindActionCreators)({ addComment: _index.addComment }, dispatch);
 }
 
 var ContainerMain = function (_React$Component) {
@@ -41,10 +41,18 @@ var ContainerMain = function (_React$Component) {
         var _this = _possibleConstructorReturn(this, (ContainerMain.__proto__ || Object.getPrototypeOf(ContainerMain)).call(this, props));
 
         _this.state = { username: "Vistor" };
+        _this.onaddComment = _this.onaddComment.bind(_this);
         return _this;
     }
 
     _createClass(ContainerMain, [{
+        key: 'onaddComment',
+        value: function onaddComment(event) {
+            event.preventDefault();
+            console.log("On add comment!");
+            this.props.addComment();
+        }
+    }, {
         key: 'render',
         value: function render() {
             /*const cookies = new Cookies();
@@ -67,7 +75,12 @@ var ContainerMain = function (_React$Component) {
                     'div',
                     null,
                     'hi,',
-                    _store.store.getState().headerInitState
+                    _store.store.getState().headerInitState.username
+                ),
+                React.createElement(
+                    'button',
+                    { className: 'btn btn-primary commentButton', onClick: this.onaddComment },
+                    'Comment'
                 )
             );
         }

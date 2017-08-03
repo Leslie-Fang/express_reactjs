@@ -71,18 +71,19 @@ var Header = function (_React$Component) {
             //console.log("bbbbbb");
             // console.log(this.props.user);
             var cookies = new _universalCookie2.default();
-            /*  cookies.set('username', 'Pacman', { path: '/' });
-              console.log(cookies.get('username'));*/
-            console.log(cookies.get('username'));
-            /* console.log(this.state.userNameValue);
-             console.log("store.getState().headerInitState");
-             console.log(store.getState().headerInitState);*/
+            /*cookies.set('username', 'Pacman', { path: '/' });
+              console.log(cookies.get('username'));
+              console.log(cookies.get('username'));
+              console.log(this.state.userNameValue);
+              console.log("store.getState().headerInitState.username");
+              console.log(store.getState().headerInitState);
+              console.log(store.getState().headerInitState.username);*/
             if (cookies.get('username')) {
                 //this.state.userNameValue = cookies.get('username');
                 return React.createElement(
                     'div',
                     { className: 'fixed' },
-                    _store.store.getState().headerInitState,
+                    _store.store.getState().headerInitState.username,
                     React.createElement(
                         'a',
                         { className: 'logoutButton', href: '/', role: 'button' },
@@ -99,7 +100,7 @@ var Header = function (_React$Component) {
                 return React.createElement(
                     'div',
                     { className: 'fixed' },
-                    _store.store.getState().headerInitState,
+                    _store.store.getState().headerInitState.username,
                     React.createElement(
                         'a',
                         { className: 'login', href: '/login', role: 'button' },

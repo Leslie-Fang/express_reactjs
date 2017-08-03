@@ -38,17 +38,18 @@ class Header extends React.Component {
         //console.log("bbbbbb");
        // console.log(this.props.user);
         const cookies = new Cookies();
-      /*  cookies.set('username', 'Pacman', { path: '/' });
-        console.log(cookies.get('username'));*/
+      /*cookies.set('username', 'Pacman', { path: '/' });
         console.log(cookies.get('username'));
-       /* console.log(this.state.userNameValue);
-        console.log("store.getState().headerInitState");
-        console.log(store.getState().headerInitState);*/
+        console.log(cookies.get('username'));
+        console.log(this.state.userNameValue);
+        console.log("store.getState().headerInitState.username");
+        console.log(store.getState().headerInitState);
+        console.log(store.getState().headerInitState.username);*/
         if(cookies.get('username')){
             //this.state.userNameValue = cookies.get('username');
             return(
                 <div className="fixed">
-                    {store.getState().headerInitState}
+                    {store.getState().headerInitState.username}
                     <a className="logoutButton" href="/" role="button"> Main </a>
                     <button type="submit" className="btn btn-primary logoutButton" onClick={this.onlogout}>Logout</button>
                 </div>
@@ -57,7 +58,7 @@ class Header extends React.Component {
             //this.state.userNameValue = this.props.login;
             return(
                 <div className="fixed">
-                    {store.getState().headerInitState}
+                    {store.getState().headerInitState.username}
                     <a className="login" href="/login" role="button"> Login </a>
                     <a className="login" href="/signup" role="button"> Signup </a>
                 </div>

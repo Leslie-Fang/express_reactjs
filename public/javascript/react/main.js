@@ -25,9 +25,9 @@ class Board extends React.Component{
         super(props);
     }
     render() {
-        console.log("asda");
-        console.log(store.getState());
-        console.log(store.getState().headerInitState);
+        //console.log("asda");
+        //console.log(store.getState());
+        //console.log(store.getState().headerInitState);
         return (
             <Provider store={store}>
                 <div className="container">

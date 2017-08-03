@@ -70,9 +70,9 @@ var Board = function (_React$Component2) {
     _createClass(Board, [{
         key: "render",
         value: function render() {
-            console.log("asda");
-            console.log(_store.store.getState());
-            console.log(_store.store.getState().headerInitState);
+            //console.log("asda");
+            //console.log(store.getState());
+            //console.log(store.getState().headerInitState);
             return React.createElement(
                 _reactRedux.Provider,
                 { store: _store.store },

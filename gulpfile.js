@@ -27,6 +27,7 @@ gulp.task('babel',function(){
         .pipe(babel())
         .pipe(gulp.dest(Paths.react_dest));
 });
+
 gulp.task('webpack', function (cb) {
     exec('webpack', function (err, stdout, stderr) {
         console.log(stdout);

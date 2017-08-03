@@ -1,6 +1,6 @@
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import {} from '../../babel/action/index.js';
+import {addComment} from '../../babel/action/index.js';
 //import Cookies from 'universal-cookie';
 import {store} from "../../babel/store.js"
 
@@ -11,13 +11,19 @@ function mapStateToProps(state) {
 }
 
 function matchDispatchToProps(dispatch){
-    return bindActionCreators({}, dispatch);
+    return bindActionCreators({addComment:addComment}, dispatch);
 }
 
 class ContainerMain extends React.Component {
     constructor(props) {
         super(props);
         this.state = {username:"Vistor"};
+        this.onaddComment = this.onaddComment.bind(this);
+    }
+    onaddComment(event){
+        event.preventDefault();
+        console.log("On add comment!");
+        this.props.addComment();
     }
     render() {
       /*const cookies = new Cookies();
@@ -28,14 +34,14 @@ class ContainerMain extends React.Component {
             this.state.username = "Vistor";
         }*/
         return(
-
             <div>
                 <div>
                  hi,{this.props.user}
                 </div>
                 <div>
-                 hi,{store.getState().headerInitState}
+                 hi,{store.getState().headerInitState.username}
                 </div>
+                <button className="btn btn-primary commentButton" onClick={this.onaddComment}>Comment</button>
             </div>
         );
     }

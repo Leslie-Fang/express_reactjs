@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-exports.headerInit = exports.logout = exports.signup = exports.submitData = undefined;
+exports.addComment = exports.headerInit = exports.logout = exports.signup = exports.submitData = undefined;
 
 var _jquery = require('jquery');
 
@@ -105,5 +105,15 @@ var headerInit = exports.headerInit = function headerInit(myUserName) {
         type: 'HEADER_INIT',
         state: 'isFetchingdata',
         payload: { username: myUserName }
+    };
+};
+
+var addComment = exports.addComment = function addComment() {
+    console.log("addComment");
+    console.log();
+    return {
+        type: 'ADD_COMMENT',
+        state: 'isFetchingdata',
+        payload: { comment: "addComment" }
     };
 };
