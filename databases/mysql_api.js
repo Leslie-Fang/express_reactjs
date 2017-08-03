@@ -50,8 +50,8 @@ exports.checkpassword=function(req, data,res,callback){
                     //use session in the memory
                     req.session.user = data.username;
                     req.session.islogin = 1;
-
-                    callback({state:'ok'});
+                    res.cookie('username', data.username, {maxAge: 60*60*1000});
+                    callback({state:'ok',user:data.username});
                 }else{
                     callback({state:'nopassword'});
                 }

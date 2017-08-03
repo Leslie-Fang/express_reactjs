@@ -81,7 +81,7 @@ class Container2 extends React.Component {
                     </div>
                     <div className="text-center">
                         <button type="submit" className="btn btn-primary loginButton">signup</button>
-                        <a class="btn btn-default" href="/main" role="button">Back to main page</a>
+                        <a class="btn btn-default" href="/" role="button">Back to main page</a>
                     </div>
                 </form>
             </div>

@@ -12,6 +12,14 @@ var _redux = require('redux');
 
 var _index = require('../../babel/action/index.js');
 
+var _universalCookie = require('universal-cookie');
+
+var _universalCookie2 = _interopRequireDefault(_universalCookie);
+
+var _store = require('../../babel/store.js');
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -23,12 +31,13 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function mapStateToProps(state) {
     return {
-        users: state.users
+        login: state.login,
+        headerInitState: state.headerInitState
     };
 }
 
 function matchDispatchToProps(dispatch) {
-    return (0, _redux.bindActionCreators)({ logout: _index.logout }, dispatch);
+    return (0, _redux.bindActionCreators)({ logout: _index.logout, headerInit: _index.headerInit }, dispatch);
 }
 
 var Header = function (_React$Component) {
@@ -39,9 +48,13 @@ var Header = function (_React$Component) {
 
         var _this = _possibleConstructorReturn(this, (Header.__proto__ || Object.getPrototypeOf(Header)).call(this, props));
 
-        _this.state = { userNameValue: "please enter username", defaultUserNameValue: "please enter username",
-            passwordValue: "please enter password", defaultPasswordValue: "please enter password" };
+        _this.state = { userNameValue: _this.props.headerInitState };
+        /*  console.log("==============>");
+          console.log(this.props.headerInitState);
+          console.log(this.state.userNameValue);
+          console.log("2==============>");*/
         _this.onlogout = _this.onlogout.bind(_this);
+        _this.props.headerInit("Vistor");
         return _this;
     }
 
@@ -55,15 +68,51 @@ var Header = function (_React$Component) {
     }, {
         key: 'render',
         value: function render() {
-            return React.createElement(
-                'div',
-                { className: 'fixed' },
-                React.createElement(
-                    'button',
-                    { type: 'submit', className: 'btn btn-primary logoutButton', onClick: this.onlogout },
-                    'Logout'
-                )
-            );
+            //console.log("bbbbbb");
+            // console.log(this.props.user);
+            var cookies = new _universalCookie2.default();
+            /*cookies.set('username', 'Pacman', { path: '/' });
+              console.log(cookies.get('username'));
+              console.log(cookies.get('username'));
+              console.log(this.state.userNameValue);
+              console.log("store.getState().headerInitState.username");
+              console.log(store.getState().headerInitState);
+              console.log(store.getState().headerInitState.username);*/
+            if (cookies.get('username')) {
+                //this.state.userNameValue = cookies.get('username');
+                return React.createElement(
+                    'div',
+                    { className: 'fixed' },
+                    _store.store.getState().headerInitState.username,
+                    React.createElement(
+                        'a',
+                        { className: 'logoutButton', href: '/', role: 'button' },
+                        ' Main '
+                    ),
+                    React.createElement(
+                        'button',
+                        { type: 'submit', className: 'btn btn-primary logoutButton', onClick: this.onlogout },
+                        'Logout'
+                    )
+                );
+            } else {
+                //this.state.userNameValue = this.props.login;
+                return React.createElement(
+                    'div',
+                    { className: 'fixed' },
+                    _store.store.getState().headerInitState.username,
+                    React.createElement(
+                        'a',
+                        { className: 'login', href: '/login', role: 'button' },
+                        ' Login '
+                    ),
+                    React.createElement(
+                        'a',
+                        { className: 'login', href: '/signup', role: 'button' },
+                        ' Signup '
+                    )
+                );
+            }
         }
     }]);
 

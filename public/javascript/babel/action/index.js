@@ -1,17 +1,23 @@
-"use strict";
+'use strict';
 
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-exports.logout = exports.signup = exports.submitData = undefined;
+exports.addComment = exports.headerInit = exports.logout = exports.signup = exports.submitData = undefined;
 
-var _jquery = require("jquery");
+var _jquery = require('jquery');
 
 var _jquery2 = _interopRequireDefault(_jquery);
 
-var _store = require("../../babel/store.js");
+var _store = require('../../babel/store.js');
+
+var _universalCookie = require('universal-cookie');
+
+var _universalCookie2 = _interopRequireDefault(_universalCookie);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var cookies = new _universalCookie2.default();
 
 var submitData = exports.submitData = function submitData(username, password) {
     console.log("log codedata");
@@ -86,5 +92,28 @@ var logout = exports.logout = function logout(username, password) {
             _store.store.dispatch(action);
             return data;
         })
+    };
+};
+
+var headerInit = exports.headerInit = function headerInit(myUserName) {
+    console.log("headerInit");
+    console.log(myUserName);
+    if (cookies.get('username')) {
+        myUserName = cookies.get('username');
+    }
+    return {
+        type: 'HEADER_INIT',
+        state: 'isFetchingdata',
+        payload: { username: myUserName }
+    };
+};
+
+var addComment = exports.addComment = function addComment() {
+    console.log("addComment");
+    console.log();
+    return {
+        type: 'ADD_COMMENT',
+        state: 'isFetchingdata',
+        payload: { comment: "addComment" }
     };
 };

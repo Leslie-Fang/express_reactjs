@@ -28,7 +28,6 @@ class Board extends React.Component{
         return (
             <Provider store={store}>
                 <div className="container">
-                    <Header />
                     <Component1 />
                 </div>
             </Provider>);

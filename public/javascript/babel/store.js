@@ -16,4 +16,5 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 /**
  * Created by leslie on 2017/7/19.
  */
-var store = exports.store = (0, _redux.createStore)(_index2.default);
+var store = exports.store = (0, _redux.createStore)(_index2.default, /* preloadedState, */
+window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
