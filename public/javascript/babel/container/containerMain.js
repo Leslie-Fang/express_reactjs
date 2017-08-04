@@ -29,7 +29,7 @@ function mapStateToProps(state) {
 }
 
 function matchDispatchToProps(dispatch) {
-    return (0, _redux.bindActionCreators)({ addComment: _index.addComment }, dispatch);
+    return (0, _redux.bindActionCreators)({ addComment: _index.addComment, saveCurrentComment: _index.saveCurrentComment, undoCurrentComment: _index.undoCurrentComment, redoCurrentComment: _index.redoCurrentComment }, dispatch);
 }
 
 var ContainerMain = function (_React$Component) {
@@ -40,17 +40,53 @@ var ContainerMain = function (_React$Component) {
 
         var _this = _possibleConstructorReturn(this, (ContainerMain.__proto__ || Object.getPrototypeOf(ContainerMain)).call(this, props));
 
-        _this.state = { username: "Vistor" };
+        _this.state = { username: "Vistor", inputText: "This text will show in the textarea" };
+        _this.onhandleTextChange = _this.onhandleTextChange.bind(_this);
+        _this.onTextFocus = _this.onTextFocus.bind(_this);
+        _this.onSave = _this.onSave.bind(_this);
+        _this.onUndo = _this.onUndo.bind(_this);
+        _this.onRedo = _this.onRedo.bind(_this);
         _this.onaddComment = _this.onaddComment.bind(_this);
         return _this;
     }
 
     _createClass(ContainerMain, [{
+        key: 'onSave',
+        value: function onSave(event) {
+            //event.preventDefault();
+            console.log("saveCurrentComment");
+            this.props.saveCurrentComment(this.state.inputText);
+        }
+    }, {
+        key: 'onUndo',
+        value: function onUndo(event) {
+            console.log("onUndo");
+            this.props.undoCurrentComment();
+        }
+    }, {
+        key: 'onRedo',
+        value: function onRedo(event) {
+            console.log("onRedo 22313");
+            this.props.redoCurrentComment();
+        }
+    }, {
         key: 'onaddComment',
         value: function onaddComment(event) {
-            event.preventDefault();
+            //event.preventDefault();
             console.log("On add comment!");
             this.props.addComment();
+        }
+    }, {
+        key: 'onTextFocus',
+        value: function onTextFocus(event) {
+            console.log("on focus");
+            //event.preventDefault();
+            this.setState({ inputText: "" });
+        }
+    }, {
+        key: 'onhandleTextChange',
+        value: function onhandleTextChange(event) {
+            this.setState({ inputText: event.target.value });
         }
     }, {
         key: 'render',
@@ -77,10 +113,36 @@ var ContainerMain = function (_React$Component) {
                     'hi,',
                     _store.store.getState().headerInitState.username
                 ),
+                React.createElement('textarea', { placeholder: this.state.inputText, value: this.state.inputText, onFocus: this.onTextFocus, onChange: this.onhandleTextChange }),
+                React.createElement(
+                    'button',
+                    { className: 'btn btn-primary commentButton', onClick: this.onSave },
+                    'Save'
+                ),
+                React.createElement(
+                    'button',
+                    { className: 'btn btn-primary commentButton', onClick: this.onUndo },
+                    'Undo'
+                ),
+                React.createElement(
+                    'button',
+                    { className: 'btn btn-primary commentButton', onClick: this.onRedo },
+                    'Redo'
+                ),
                 React.createElement(
                     'button',
                     { className: 'btn btn-primary commentButton', onClick: this.onaddComment },
                     'Comment'
+                ),
+                React.createElement(
+                    'div',
+                    null,
+                    _store.store.getState().saveCurrentCommentState.currentComment
+                ),
+                React.createElement(
+                    'div',
+                    null,
+                    _store.store.getState().undoRedoCommentState.currentComment.currentComment
                 )
             );
         }

@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-exports.addComment = exports.headerInit = exports.logout = exports.signup = exports.submitData = undefined;
+exports.redoCurrentComment = exports.undoCurrentComment = exports.saveCurrentComment = exports.addComment = exports.headerInit = exports.logout = exports.signup = exports.submitData = undefined;
 
 var _jquery = require('jquery');
 
@@ -115,5 +115,32 @@ var addComment = exports.addComment = function addComment() {
         type: 'ADD_COMMENT',
         state: 'isFetchingdata',
         payload: { comment: "addComment" }
+    };
+};
+
+var saveCurrentComment = exports.saveCurrentComment = function saveCurrentComment(myComment) {
+    console.log("saveCurrentComment");
+    return {
+        type: 'SAVE_COMMENT',
+        state: 'isFetchingdata',
+        payload: { comment: myComment }
+    };
+};
+
+var undoCurrentComment = exports.undoCurrentComment = function undoCurrentComment() {
+    console.log("undoCurrentComment");
+    return {
+        type: 'UNDO_COMMENT',
+        state: 'isFetchingdata',
+        payload: { comment: "mycomment" }
+    };
+};
+
+var redoCurrentComment = exports.redoCurrentComment = function redoCurrentComment() {
+    console.log("redoCurrentComment");
+    return {
+        type: 'REDO_COMMENT',
+        state: 'isFetchingdata',
+        payload: { comment: "mycomment" }
     };
 };
