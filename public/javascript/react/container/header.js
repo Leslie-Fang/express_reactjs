@@ -44,7 +44,9 @@ class Header extends React.Component {
         console.log(this.state.userNameValue);
         console.log("store.getState().headerInitState.username");
         console.log(store.getState().headerInitState);
-        console.log(store.getState().headerInitState.username);*/
+        console.log(store.getState().headerInitState.username);
+        console.log("===========>");
+        console.log(this.state.userNameValue);*/
         if(cookies.get('username')){
             //this.state.userNameValue = cookies.get('username');
             return(

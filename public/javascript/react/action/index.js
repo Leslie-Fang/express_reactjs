@@ -101,3 +101,34 @@ export const addComment = () => {
         payload: {comment:"addComment"}
     }
 };
+
+export const saveCurrentComment = (myComment) => {
+    console.log("saveCurrentComment");
+    return {
+        type: 'SAVE_COMMENT',
+        state: 'isFetchingdata',
+        payload: {comment:myComment}
+    }
+};
+
+
+export const undoCurrentComment = () => {
+    console.log("undoCurrentComment");
+    return {
+        type: 'UNDO_COMMENT',
+        state: 'isFetchingdata',
+        payload: {comment:"mycomment"}
+    }
+};
+
+
+export const redoCurrentComment = () => {
+    console.log("redoCurrentComment");
+    return {
+        type: 'REDO_COMMENT',
+        state: 'isFetchingdata',
+        payload: {comment:"mycomment"}
+    }
+};
+
+

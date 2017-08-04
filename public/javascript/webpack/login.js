@@ -3604,7 +3604,7 @@ function verifyPlainObject(value, displayName, methodName) {
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-exports.addComment = exports.headerInit = exports.logout = exports.signup = exports.submitData = undefined;
+exports.redoCurrentComment = exports.undoCurrentComment = exports.saveCurrentComment = exports.addComment = exports.headerInit = exports.logout = exports.signup = exports.submitData = undefined;
 
 var _jquery = __webpack_require__(83);
 
@@ -3716,6 +3716,33 @@ var addComment = exports.addComment = function addComment() {
         type: 'ADD_COMMENT',
         state: 'isFetchingdata',
         payload: { comment: "addComment" }
+    };
+};
+
+var saveCurrentComment = exports.saveCurrentComment = function saveCurrentComment(myComment) {
+    console.log("saveCurrentComment");
+    return {
+        type: 'SAVE_COMMENT',
+        state: 'isFetchingdata',
+        payload: { comment: myComment }
+    };
+};
+
+var undoCurrentComment = exports.undoCurrentComment = function undoCurrentComment() {
+    console.log("undoCurrentComment");
+    return {
+        type: 'UNDO_COMMENT',
+        state: 'isFetchingdata',
+        payload: { comment: "mycomment" }
+    };
+};
+
+var redoCurrentComment = exports.redoCurrentComment = function redoCurrentComment() {
+    console.log("redoCurrentComment");
+    return {
+        type: 'REDO_COMMENT',
+        state: 'isFetchingdata',
+        payload: { comment: "mycomment" }
     };
 };
 
@@ -7308,7 +7335,9 @@ var allReducers = (0, _redux.combineReducers)({
     login: _reducer.login,
     signup: _reducer.signup,
     logout: _reducer.logout,
-    headerInitState: _reducer.headerInitState
+    headerInitState: _reducer.headerInitState,
+    saveCurrentCommentState: _reducer.saveCurrentCommentState,
+    undoRedoCommentState: _reducer.undoRedoCommentState
 });
 
 exports.default = allReducers;
@@ -7350,7 +7379,7 @@ var logout = exports.logout = function logout() {
             return Object.assign({}, state, { logout: action.payload });
         default:
             console.log('return the defalut logoutData', state, 'and action', action);
-            return state;
+            return Object.assign({}, state);
     }
 };
 
@@ -7375,7 +7404,7 @@ var signup = exports.signup = function signup() {
             return Object.assign({}, state, { signup: action.payload });
         default:
             console.log('return the defalut signupData', state, 'and action', action);
-            return state;
+            return Object.assign({}, state);
     }
 };
 
@@ -7408,7 +7437,7 @@ var login = exports.login = function login() {
         default:
             console.log('return the defalut loginData', state, 'and action', action);
             //console.log(state);
-            return state;
+            return Object.assign({}, state);
     }
 };
 
@@ -7424,9 +7453,85 @@ var headerInitState = exports.headerInitState = function headerInitState() {
             return Object.assign({}, state, { username: action.payload.username });
         default:
             console.log('return the defalut pageInit', state, 'and action', action);
-            return state;
+            return Object.assign({}, state);
     }
 };
+
+var saveCurrentCommentState = exports.saveCurrentCommentState = function saveCurrentCommentState() {
+    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : { currentComment: null };
+    var action = arguments[1];
+
+    switch (action.type) {
+        case 'SAVE_COMMENT':
+            console.log('return the saveCurrentComment', state, 'and action', action);
+            //console.log(action.payload.username);
+            //console.log(Object.assign({},state,{username:action.payload.username}));
+            return Object.assign({}, state, { currentComment: action.payload.comment });
+        default:
+            console.log('return the defalut saveCurrentComment', state, 'and action', action);
+            return Object.assign({}, state);
+    }
+};
+
+var highOrdersaveCurrentCommentState = function highOrdersaveCurrentCommentState(reducer) {
+    //for pastComment currentComment and futureComment: each one is a state or state array
+    var initialState = {
+        pastComment: [],
+        currentComment: reducer({ currentComment: null }, {}),
+        futureComment: []
+    };
+
+    return function () {
+        var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
+        var action = arguments[1];
+        var pastComment = state.pastComment,
+            currentComment = state.currentComment,
+            futureComment = state.futureComment;
+
+
+        switch (action.type) {
+            case 'UNDO_COMMENT':
+                console.log('return the highOrdersaveCurrentCommentState', state, 'and action', action);
+                //console.log(action.payload.username);
+                //console.log(Object.assign({},state,{username:action.payload.username}));
+                var newpastComment = pastComment.slice(0, pastComment.length - 1);
+                var previousComment = pastComment[pastComment.length - 1];
+                futureComment.push(currentComment);
+                console.log("=========>");
+                console.log(previousComment);
+                return {
+                    pastComment: newpastComment,
+                    currentComment: previousComment,
+                    futureComment: futureComment
+                };
+            //return Object.assign({}, state, {comment: action.payload.comment});
+            case 'REDO_COMMENT':
+                console.log('return the highOrdersaveCurrentCommentState', state, 'and action', action);
+                pastComment.push(currentComment);
+                var nextComment = futureComment[futureComment.length - 1];
+                var newfutureComment = futureComment.slice(0, futureComment.length - 1);
+                return {
+                    pastComment: pastComment,
+                    currentComment: nextComment,
+                    futureComment: newfutureComment
+                };
+            default:
+                console.log('return the defalut highOrdersaveCurrentCommentState', state, 'and action', action);
+                var newcurrentComment = reducer(currentComment, action);
+                if (newcurrentComment === currentComment) {
+                    return state;
+                }
+                pastComment.push(currentComment);
+                return {
+                    pastComment: pastComment,
+                    currentComment: newcurrentComment,
+                    futureComment: []
+                };
+        }
+    };
+};
+
+var undoRedoCommentState = exports.undoRedoCommentState = highOrdersaveCurrentCommentState(saveCurrentCommentState);
 
 /***/ }),
 /* 83 */
@@ -18233,7 +18338,9 @@ var Header = function (_React$Component) {
               console.log(this.state.userNameValue);
               console.log("store.getState().headerInitState.username");
               console.log(store.getState().headerInitState);
-              console.log(store.getState().headerInitState.username);*/
+              console.log(store.getState().headerInitState.username);
+              console.log("===========>");
+              console.log(this.state.userNameValue);*/
             if (cookies.get('username')) {
                 //this.state.userNameValue = cookies.get('username');
                 return React.createElement(

@@ -22,7 +22,7 @@ export var logout = function(state = {logout:null},action){
             return Object.assign({},state,{logout:action.payload});
         default:
             console.log('return the defalut logoutData',state, 'and action', action);
-            return state;
+            return Object.assign({},state);
     }
 };
 
@@ -44,7 +44,7 @@ export var signup = function(state = {signip:null},action){
         return Object.assign({},state,{signup:action.payload});
     default:
         console.log('return the defalut signupData',state, 'and action', action);
-        return state;
+        return Object.assign({},state);
     }
 };
 
@@ -74,7 +74,7 @@ export var login = function(state = {login:userData},action){
         default:
             console.log('return the defalut loginData',state, 'and action', action);
             //console.log(state);
-            return state;
+            return Object.assign({},state);
     }
 };
 
@@ -87,6 +87,75 @@ export var headerInitState = function(state = {username:null},action){
             return Object.assign({},state,{username:action.payload.username});
         default:
             console.log('return the defalut pageInit',state, 'and action', action);
-            return state;
+            return Object.assign({},state);
     }
-}
+};
+
+export var saveCurrentCommentState = function(state = {currentComment:null},action){
+    switch (action.type) {
+        case 'SAVE_COMMENT':
+            console.log('return the saveCurrentComment',state, 'and action', action);
+            //console.log(action.payload.username);
+            //console.log(Object.assign({},state,{username:action.payload.username}));
+            return Object.assign({},state,{currentComment:action.payload.comment});
+        default:
+            console.log('return the defalut saveCurrentComment',state, 'and action', action);
+            return Object.assign({},state);
+    }
+};
+
+var highOrdersaveCurrentCommentState = function(reducer){
+//for pastComment currentComment and futureComment: each one is a state or state array
+    const initialState = {
+        pastComment: [],
+        currentComment: reducer({currentComment:null}, {}),
+        futureComment: []
+    };
+
+    return function (state = initialState, action) {
+        const { pastComment, currentComment, futureComment } = state;
+
+        switch (action.type) {
+            case 'UNDO_COMMENT':
+                console.log('return the highOrdersaveCurrentCommentState', state, 'and action', action);
+                //console.log(action.payload.username);
+                //console.log(Object.assign({},state,{username:action.payload.username}));
+                const newpastComment = pastComment.slice(0, pastComment.length - 1);
+                const previousComment = pastComment[pastComment.length - 1];
+                futureComment.push(currentComment);
+                console.log("=========>");
+                console.log(previousComment);
+                return {
+                    pastComment: newpastComment,
+                    currentComment: previousComment,
+                    futureComment: futureComment
+                };
+                //return Object.assign({}, state, {comment: action.payload.comment});
+            case 'REDO_COMMENT':
+                console.log('return the highOrdersaveCurrentCommentState', state, 'and action', action);
+                pastComment.push(currentComment);
+                const nextComment = futureComment[futureComment.length - 1];
+                const newfutureComment = futureComment.slice(0, futureComment.length - 1);
+                return {
+                    pastComment: pastComment,
+                    currentComment: nextComment,
+                    futureComment: newfutureComment
+                };
+            default:
+                console.log('return the defalut highOrdersaveCurrentCommentState', state, 'and action', action);
+                const newcurrentComment = reducer(currentComment, action);
+                if (newcurrentComment === currentComment) {
+                    return state
+                }
+                pastComment.push(currentComment);
+                return {
+                    pastComment: pastComment,
+                    currentComment: newcurrentComment,
+                    futureComment: []
+                }
+        }
+    }
+};
+
+export var undoRedoCommentState = highOrdersaveCurrentCommentState(saveCurrentCommentState);
+
