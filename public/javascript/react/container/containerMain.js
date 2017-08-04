@@ -35,7 +35,7 @@ class ContainerMain extends React.Component {
         this.props.undoCurrentComment();
     };
     onRedo(event){
-        console.log("onRedo 22313");
+        console.log("onRedo");
         this.props.redoCurrentComment();
     };
     onaddComment(event){
