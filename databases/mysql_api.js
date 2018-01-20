@@ -7,7 +7,7 @@ exports.validateifUserExist=function(req, data,res,callback){
     var connection = mysql.createConnection(config);
     connection.connect();
     console.log(data);
-    connection.query('select * from user where username = ?',data.username, function(err, result) {
+    connection.query('select * from expressUser where username = ?',data.username, function(err, result) {
         if (err) throw err;
         if(result.length === 0) {
             //console.log(result);
@@ -24,7 +24,7 @@ exports.checkpassword=function(req, data,res,callback){
     var connection = mysql.createConnection(config);
     connection.connect();
     console.log(data);
-    connection.query('select * from user where username = ?',data.username, function(err, result,fields) {
+    connection.query('select * from expressUser where username = ?',data.username, function(err, result,fields) {
         if (err) throw err;
         console.log("HHH");
         if(result.length === 0) {
@@ -58,7 +58,7 @@ exports.saveuser=function(req, data,res,callback){
     var connection = mysql.createConnection(config);
     connection.connect();
     console.log(data);
-    connection.query('insert into user (username, password) values(?,?)',[data.username,data.password], function(err, result) {
+    connection.query('insert into expressUser (username, password) values(?,?)',[data.username,data.password], function(err, result) {
 
         if (err) throw err;
         callback({state:'ok'});
